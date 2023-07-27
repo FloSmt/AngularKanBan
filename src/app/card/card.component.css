@@ -1,0 +1,23 @@
+.card {
+  border: 2px solid lightgray;
+  border-radius: 10px;
+  max-width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.card .title {
+  margin: 0;
+}
+
+.card .id {
+  margin: 0;
+  color: gray;
+  padding-right: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+
