@@ -12,9 +12,7 @@ import { GridLayoutComponent } from './grid-layout/grid-layout.component';
 @NgModule({
   declarations: [
     AppComponent,
-
-    CardComponent
-
+    CardComponent,
     GridLayoutComponent
 
   ],
