@@ -10,7 +10,7 @@ export class CardService {
   public static cards:Card[] = [
     {
       id: 139,
-      priority: new PriorityService().getPriority()[1],
+      priority: new PriorityService().getPriority(0),
       title: "Das ist eine test-Card"
     }
   ];
