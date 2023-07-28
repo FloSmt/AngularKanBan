@@ -7,13 +7,15 @@ import { CardComponent } from './card/card.component';
 
 import { HeaderComponent } from "./header/header.component";
 import { GridLayoutComponent } from './grid-layout/grid-layout.component';
+import { StatusComponent } from './status/status.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
-    GridLayoutComponent
+    GridLayoutComponent,
+    StatusComponent
 
   ],
   imports: [
