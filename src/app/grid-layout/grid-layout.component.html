@@ -1,28 +1,34 @@
+<!-- grid-layout.component.html -->
 <div class="container">
+    <!-- Column 1 -->
+    <div class="column c-todo">
+        <span>ToDo</span><hr>
+        <div *ngFor="let card of column1">
+            <app-card [card]="card"></app-card>
+        </div>
+    </div>
 
-  <!--Spalte ToDos-->
-  <div class="column c-todo">
-    <span>ToDo (2)</span>
-    <hr>
-    <!--Cards hier einfügen-->
-    <app-card title="Test Card"></app-card>
-  </div>
+    <!-- Column 2 -->
+    <div class="column c-prog">
+        <span>In Progress</span><hr>
+        <div *ngFor="let card of column2">
+            <app-card [card]="card"></app-card>
+        </div>
+    </div>
 
-  <!--Spalte In Progress-->
-  <div class="column c-prog">
-    <span>In Progress (3/4)</span>
-    <hr>
-  </div>
+    <!-- Column 3 -->
+    <div class="column c-test">
+        <span>Test</span><hr>
+        <div *ngFor="let card of column3">
+            <app-card [card]="card"></app-card>
+        </div>
+    </div>
 
-  <!--Spalte Testing/Review-->
-  <div class="column c-test">
-    <span>Testing/Review (3)</span>
-    <hr>
-  </div>
-
-  <!--Spalte Done-->
-  <div class="column c-done">
-    <span>Done (5)</span>
-    <hr>
-  </div>
+    <!-- Column 4 -->
+    <div class="column c-done">
+        <span>Done</span><hr>
+        <div *ngFor="let card of column4">
+            <app-card [card]="card"></app-card>
+        </div>
+    </div>
 </div>
