@@ -1,7 +1,8 @@
 // grid-layout.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Card } from '../card';
+import { Card } from "../card";
 import { CardService } from '../card.service';
+import {CardComponent} from "../card/card.component";
 
 @Component({
   selector: 'app-grid-layout',
@@ -28,4 +29,17 @@ export class GridLayoutComponent implements OnInit {
     // Optional: Perform any initialization logic here if needed
   }
 
+  // Method to add a new card to the specified column
+  addNewCardToColumn(event: { columnIndex: number; title: string; content: string }) {
+    const { columnIndex, title, content } = event;
+    this.cardService.addCardsToColumn(columnIndex, title, content); // Rufen Sie die Methode addCardsToColumn mit den richtigen Parametern auf
+    const columns = this.cardService.getColumns();
+    this.column1 = columns[0];
+    this.column2 = columns[1];
+    this.column3 = columns[2];
+    this.column4 = columns[3];
+
+    const newCardIndex = this.column1.length-1;
+    this.column1[newCardIndex].id = newCardIndex+1;
+  }
 }

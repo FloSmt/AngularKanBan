@@ -7,6 +7,7 @@
   justify-content: left;
   align-items: center;
   cursor: pointer;
+  margin-bottom: 1em;
 }
 
 .card .title {

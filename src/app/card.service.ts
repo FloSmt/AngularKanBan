@@ -1,16 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Card } from "./card";
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
   private columns : Card[][] = [[], [], [],[]];
 
-
   addCardsToColumn(columnIndex: number, title:string, content:string) {
-    this.columns[columnIndex - 1].push({id:1, title, content});
+    if(columnIndex >= 1 && columnIndex <= 4){
+      const newCard: Card = {id: this.getNextId(), title:title, content:content};
+      this.columns[columnIndex-1].push(newCard);
+    }
+  }
+
+  private getNextId(): number {
+    let maxId = 0;
+    this.columns.forEach((column) => {
+      column.forEach((card) => {
+        if (card.id > maxId) {
+          maxId = card.id;
+        }
+      });
+    });
+    return maxId + 1;
   }
 
 

@@ -23,7 +23,7 @@ export class StatusComponent implements OnInit {
   // Define a property to hold the statusList for the first column
   statusList: Card[] = [];
 
-  addNewCardToColumn(columnIndex: number, title:string, content:string) {
+  /* addNewCardToColumn(columnIndex: number, title:string, content:string) {
     this.cardService.addCardsToColumn(columnIndex,title,content);
 
     //update the card arrays after adding new card
@@ -37,5 +37,5 @@ export class StatusComponent implements OnInit {
     const newCardIndex = this.statusList.length-1;
 
     this.statusList[newCardIndex].id = newCardIndex+1;
-  }
+  } */
 }

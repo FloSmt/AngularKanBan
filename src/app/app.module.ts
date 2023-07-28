@@ -8,6 +8,9 @@ import { CardComponent } from './card/card.component';
 import { HeaderComponent } from "./header/header.component";
 import { GridLayoutComponent } from './grid-layout/grid-layout.component';
 import { StatusComponent } from './status/status.component';
+import { CardInputComponent } from './card-input/card-input.component';
+import {FormsModule} from "@angular/forms";
+import {CardService} from "./card.service";
 
 
 @NgModule({
@@ -15,14 +18,16 @@ import { StatusComponent } from './status/status.component';
     AppComponent,
     CardComponent,
     GridLayoutComponent,
-    StatusComponent
+    StatusComponent,
+    CardInputComponent
 
   ],
   imports: [
     BrowserModule,
-    HeaderComponent
+    HeaderComponent,
+    FormsModule
   ],
-  providers: [],
+  providers: [CardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
