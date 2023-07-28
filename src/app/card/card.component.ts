@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Card } from '../card';
 
 @Component({
   selector: 'app-card',
@@ -6,6 +7,10 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
+  @Input() card!: Card; // Use the non-null assertion operator
   @Input() id:number = 0;
-  @Input() title:string = "";
+  @Input() title:string = '';
+  @Input() content:string ='';
 }
+
+
