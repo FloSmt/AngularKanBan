@@ -1,0 +1,17 @@
+<!-- status.component.html -->
+<div class="status-container">
+    <!-- Add a button outside the card component to add new cards -->
+    <button (click)="addNewCardToColumn(4,'Der Titel', 'Der Content')">Add New Card to Column 1</button>
+
+    <!-- Loop through the columns -->
+    <div class="status-column" *ngFor="let column of cardService.getColumns(); let columnIndex = index">
+        <div class="card-container">
+            <!-- Loop through the cards within each column -->
+            <div class="card" *ngFor="let card of column">
+                <div class="card-content">
+                    <!-- Display card content here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
