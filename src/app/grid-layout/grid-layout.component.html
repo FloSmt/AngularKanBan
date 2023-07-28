@@ -5,7 +5,7 @@
     <span>ToDo (2)</span>
     <hr>
     <!--Cards hier einfügen-->
-    <app-card title="Test Card"></app-card>
+    <app-card [id]="CardService.getCards()[0].id" [title]="CardService.getCards()[0].title" [priority]="CardService.getCards()[0].priority"></app-card>
   </div>
 
   <!--Spalte In Progress-->

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {CardService} from "../card.service";
+import {PriorityService} from "../priority.service";
 
 @Component({
   selector: 'app-grid-layout',
@@ -7,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class GridLayoutComponent {
 
+  protected readonly CardService = CardService;
+  protected readonly PriorityService = PriorityService;
 }

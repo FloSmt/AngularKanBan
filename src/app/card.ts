@@ -1,4 +1,7 @@
+import {Priority} from "./priority";
+
 export interface Card {
   id:number,
-  title:string
+  title:string,
+  priority:Priority;
 }
