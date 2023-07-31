@@ -9,6 +9,7 @@ import {CardComponent} from "../card/card.component";
   templateUrl: './grid-layout.component.html',
   styleUrls: ['./grid-layout.component.css']
 })
+
 export class GridLayoutComponent implements OnInit {
   // Define properties to hold cards for each column
   column1: Card[] = [];
@@ -32,6 +33,7 @@ export class GridLayoutComponent implements OnInit {
   // Method to add a new card to the specified column
   addNewCardToColumn(event: { columnIndex: number; title: string; content: string }) {
     const { columnIndex, title, content } = event;
+
     this.cardService.addCardsToColumn(columnIndex, title, content); // Rufen Sie die Methode addCardsToColumn mit den richtigen Parametern auf
     const columns = this.cardService.getColumns();
     this.column1 = columns[0];
