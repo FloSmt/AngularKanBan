@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import {Card} from "./card";
 import {PriorityService} from "./priority.service";
 import {Priority} from "./priority";
@@ -7,27 +8,23 @@ import {Priority} from "./priority";
   providedIn: 'root'
 })
 export class CardService {
-
-  public cards:Card[] = [
-    {
-      id: 139,
-      priority: this.priorityService.getPriority(3),
-      title: "Das ist eine test-Card mit sehr langem Titel und extem vielen Buchstaben",
-      description: " gdfgdfdd fgfd g dfgdfgdgddf dgdg dg dgdg gdfgd dfgfd ggd gdg gdgdfgdgdfg dgfdg dg sdf fsfsffsf sdf sds  ffsf sdsfsfdffd   d dfdfsf sfsdf sf fd df f"
-    },
-    {
-      id: 140,
-      priority: this.priorityService.getPriority(1),
-      title: "Titel",
-      description: "beschreibung"
+  
+  private cards : Card[] = [];
+  
+    addCard(title:string, content:string, columnIndex:number) {
+      const newCard: Card = {id: this.getNextId(), title:title, content:content,columnIndex:columnIndex};
+      this.cards.push(newCard);
     }
-  ];
 
-  constructor(private priorityService:PriorityService) { }
+    private getNextId() :number {
+      return this.cards.length+1
+    }
 
-  public addCard(card:Card) {
-    this.cards.push(card);
-  }
+    getCards() : Card[] {
+      return this.cards;
+    }
+
+  constructor() { }
 
   public getCards() {
     return this.cards;
@@ -39,4 +36,6 @@ export class CardService {
     this.cards.find(x=>x.id == card.id)!.title = card.title;
 
   }
+
 }
+

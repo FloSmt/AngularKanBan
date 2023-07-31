@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import {Priority} from "../priority";
 import {Card} from "../card";
 import {EditCardComponent} from "../edit-card/edit-card.component";
@@ -24,3 +25,5 @@ export class CardComponent {
 
   protected readonly EditCardComponent = EditCardComponent;
 }
+
+
