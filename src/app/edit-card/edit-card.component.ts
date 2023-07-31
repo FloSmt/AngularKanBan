@@ -128,6 +128,7 @@ export class EditCardComponent implements AfterContentInit{
 
   save() {
     this.cardService.setCard({title:this.GetTitle(), priority:this.GetPriority(),description:this.GetDescription(),id:this.appComponent.inCardEdit.id})
+    this.closeSelection()
     this.closeWindow();
   }
 
