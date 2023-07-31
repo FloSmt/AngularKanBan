@@ -5,23 +5,20 @@ import { Card } from "./card";
   providedIn: 'root'
 })
 export class CardService {
-  private columns : Card[][] = [[], [], [],[]];
-  private idCounter: number = 1;
-
-  addCardsToColumn(columnIndex: number, title:string, content:string) {
-    if(columnIndex >= 1 && columnIndex <= 4){
-      const newCard: Card = {id: this.getNextId(), title:title, content:content};
-      this.columns[columnIndex-1].push(newCard);
+  private cards : Card[] = [];
+    addCard(title:string, content:string, columnIndex:number) {
+      const newCard: Card = {id: this.getNextId(), title:title, content:content,columnIndex:columnIndex};
+      this.cards.push(newCard);
     }
-  }
 
-  private getNextId(): number {
-    return this.idCounter++;
-  }
+    private getNextId() :number {
+      return this.cards.length+1
+    }
+
+    getCards() : Card[] {
+      return this.cards;
+    }
 
 
-  getColumns() : Card[][] {
-    return this.columns;
-  }
 }
 

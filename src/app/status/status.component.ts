@@ -9,19 +9,15 @@ import { CardService } from '../card.service';
   styleUrls: ['./status.component.css']
 })
 export class StatusComponent implements OnInit {
-  column1: Card[] = [];
-  column2: Card[] = [];
-  column3: Card[] = [];
-  column4: Card[] = [];
-  constructor(public cardService: CardService) {}
+  statusList: Card[] = [];
+  constructor(public cardService: CardService) {
+    this.statusList = this.cardService.getCards();
+  }
 
   ngOnInit() {
     // Initialize the statusList to the first column cards on component initialization
-    this.statusList = this.cardService.getColumns()[0];
-  }
 
-  // Define a property to hold the statusList for the first column
-  statusList: Card[] = [];
+  }
 
   /* addNewCardToColumn(columnIndex: number, title:string, content:string) {
     this.cardService.addCardsToColumn(columnIndex,title,content);

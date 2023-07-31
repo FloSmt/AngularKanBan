@@ -4,10 +4,10 @@
     <!--<button (click)="addNewCardToColumn(4,'Der Titel', 'Der Content')">Add New Card to Column 1</button> -->
 
     <!-- Loop through the columns -->
-    <div class="status-column" *ngFor="let column of cardService.getColumns(); let columnIndex = index">
+    <div class="status-column" *ngFor="let card of statusList; let columnIndex = index">
         <div class="card-container">
             <!-- Loop through the cards within each column -->
-            <div class="card" *ngFor="let card of column">
+            <div class="card" *ngFor="let card of statusList">
                 <div class="card-content">
                     <!-- Display card content here -->
                 </div>

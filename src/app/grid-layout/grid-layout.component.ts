@@ -16,31 +16,27 @@ export class GridLayoutComponent implements OnInit {
   column3: Card[] = [];
   column4: Card[] = [];
 
+
   constructor(public cardService: CardService) {
-    // Assign the cards for each column from the CardService
-    const columns = this.cardService.getColumns();
-    this.column1 = columns[0];
-    this.column2 = columns[1];
-    this.column3 = columns[2];
-    this.column4 = columns[3];
+
   }
 
   ngOnInit() {
-    // Optional: Perform any initialization logic here if needed
+    this.updateColumns();
   }
 
   // Method to add a new card to the specified column
-  addNewCardToColumn(event: { columnIndex: number; title: string; content: string }) {
-    const { columnIndex, title, content } = event;
+  addNewCardToColumn(event: {columnIndex:number; title: string; content: string }) {
+    const { title, content, columnIndex } = event;
+    this.cardService.addCard(title, content, columnIndex);
+    this.updateColumns();
+  }
 
-    this.cardService.addCardsToColumn(columnIndex, title, content); // Rufen Sie die Methode addCardsToColumn mit den richtigen Parametern auf
-    const columns = this.cardService.getColumns();
-    this.column1 = columns[0];
-    this.column2 = columns[1];
-    this.column3 = columns[2];
-    this.column4 = columns[3];
-
-    const newCardIndex = this.column1.length-1;
-    this.column1[newCardIndex].id = newCardIndex+1;
+  private updateColumns() {
+    const cards = this.cardService.getCards();
+    this.column1 = cards.filter((card) => card.columnIndex === 1);
+    this.column2 = cards.filter((card) => card.columnIndex === 2);
+    this.column3 = cards.filter((card) => card.columnIndex === 3);
+    this.column4 = cards.filter((card) => card.columnIndex === 4);
   }
 }

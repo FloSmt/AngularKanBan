@@ -29,6 +29,7 @@ input,textarea:focus {
 
 textarea {
   height: 100px;
+  min-height: 100px;
 }
 
 button {
