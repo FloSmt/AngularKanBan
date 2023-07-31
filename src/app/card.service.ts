@@ -9,14 +9,15 @@ export class CardService {
 
   addCardsToColumn(columnIndex: number, title:string, content:string) {
     if(columnIndex >= 1 && columnIndex <= 4){
-      const newCard: Card = {id: this.getNextId(), title:title, content:content};
+      const newCard: Card = {id: this.getNextId(columnIndex), title:title, content:content};
       this.columns[columnIndex-1].push(newCard);
     }
   }
 
-  private getNextId(): number {
+  private getNextId(columnIndex:number): number {
     let maxId = 0;
-    this.columns.forEach((column) => {
+    const column = this.columns[columnIndex -1];
+    this.columns.forEach((card) => {
       column.forEach((card) => {
         if (card.id > maxId) {
           maxId = card.id;
