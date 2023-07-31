@@ -22,7 +22,7 @@ export class GridLayoutComponent implements OnInit {
   constructor(public cardService: CardService) {
 
   }
-  
+
   protected readonly CardService = CardService;
   protected readonly PriorityService = PriorityService;
 
@@ -31,8 +31,8 @@ export class GridLayoutComponent implements OnInit {
   }
 
   // Method to add a new card to the specified column
-  addNewCardToColumn(event: {columnIndex:number; title: string; content: string }) {
-    const { title, content, columnIndex } = event;
+  addNewCardToColumn(event: { columnIndex: number; title: string; content: string }) {
+    const {title, content, columnIndex} = event;
     this.cardService.addCard(title, content, columnIndex);
     this.updateColumns();
   }
@@ -43,4 +43,5 @@ export class GridLayoutComponent implements OnInit {
     this.column2 = cards.filter((card) => card.columnIndex === 2);
     this.column3 = cards.filter((card) => card.columnIndex === 3);
     this.column4 = cards.filter((card) => card.columnIndex === 4);
+  }
 }

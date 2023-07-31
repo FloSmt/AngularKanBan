@@ -12,7 +12,7 @@ import {PriorityService} from "./priority.service";
 export class AppComponent {
   title = 'AngularKanBan';
 
-  inCardEdit:Card = {id:-1,title:"unknown",description:"unknown", priority: this.priorityService.getPriority(-1)};
+  inCardEdit:Card = {id:-1,title:"unknown",description:"unknown", priority: this.priorityService.getPriority(-1), columnIndex:1};
 
   constructor(public priorityService:PriorityService) {
   }

@@ -7,6 +7,23 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+
+}
+
+.card .priority {
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 100%;
+  margin-left: 10px;
+  margin-right: 20px;
+  background-color: greenyellow;
+}
+
+.card .content {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: left;
 }
 
 .card .title {
@@ -38,5 +55,3 @@
 .card .informationLine span:not(:last-child) {
   padding-right: 7px;
 }
-
-

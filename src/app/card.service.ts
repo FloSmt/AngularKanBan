@@ -8,11 +8,11 @@ import {Priority} from "./priority";
   providedIn: 'root'
 })
 export class CardService {
-  
+
   private cards : Card[] = [];
-  
-    addCard(title:string, content:string, columnIndex:number) {
-      const newCard: Card = {id: this.getNextId(), title:title, content:content,columnIndex:columnIndex};
+
+    addCard(title:string, description:string, columnIndex:number) {
+      const newCard: Card = {id: this.getNextId(), title:title, description:description,columnIndex:columnIndex, priority:this.priorityService.getPriority(-1)};
       this.cards.push(newCard);
     }
 
@@ -24,11 +24,8 @@ export class CardService {
       return this.cards;
     }
 
-  constructor() { }
+  constructor(private priorityService:PriorityService) { }
 
-  public getCards() {
-    return this.cards;
-  }
 
   public setCard(card:Card):void {
     this.cards.find(x=>x.id == card.id)!.priority = card.priority;
