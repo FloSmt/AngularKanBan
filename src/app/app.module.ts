@@ -11,6 +11,8 @@ import { StatusComponent } from './status/status.component';
 import { CardInputComponent } from './card-input/card-input.component';
 import {FormsModule} from "@angular/forms";
 import {CardService} from "./card.service";
+import { EditCardComponent } from './edit-card/edit-card.component';
+import { PriorityComponent } from './priority/priority.component';
 
 
 @NgModule({
@@ -19,8 +21,9 @@ import {CardService} from "./card.service";
     CardComponent,
     GridLayoutComponent,
     StatusComponent,
-    CardInputComponent
-
+    CardInputComponent,
+    EditCardComponent,
+    PriorityComponent
   ],
   imports: [
     BrowserModule,

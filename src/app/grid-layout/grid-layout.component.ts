@@ -1,7 +1,9 @@
+
 // grid-layout.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Card } from "../card";
 import { CardService } from '../card.service';
+import {PriorityService} from "../priority.service";
 
 @Component({
   selector: 'app-grid-layout',
@@ -20,6 +22,9 @@ export class GridLayoutComponent implements OnInit {
   constructor(public cardService: CardService) {
 
   }
+  
+  protected readonly CardService = CardService;
+  protected readonly PriorityService = PriorityService;
 
   ngOnInit() {
     this.updateColumns();
@@ -38,5 +43,4 @@ export class GridLayoutComponent implements OnInit {
     this.column2 = cards.filter((card) => card.columnIndex === 2);
     this.column3 = cards.filter((card) => card.columnIndex === 3);
     this.column4 = cards.filter((card) => card.columnIndex === 4);
-  }
 }

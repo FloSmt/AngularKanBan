@@ -1,25 +1,42 @@
 .card {
   border: 2px solid lightgray;
-  border-radius: 10px;
+  border-radius: 5px;
   max-width: 100%;
-  padding: 10px;
+  padding: 5px;
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 1em;
 }
 
 .card .title {
   margin: 0;
+  font-size: 25px;
 }
 
-.card .id {
+.card .informationLine {
   margin: 0;
   color: gray;
   padding-right: 10px;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
+}
+
+.card .profilimg {
+  width: 35px;
+  height: 35px;
+  background-color: gray;
+  border-radius: 100%;
+  margin-right: 10px;
+
+}
+
+.card .informationLine span:not(:first-child) {
+  padding-left: 7px;
+}
+
+.card .informationLine span:not(:last-child) {
+  padding-right: 7px;
 }
 
 

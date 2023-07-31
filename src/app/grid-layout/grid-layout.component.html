@@ -1,6 +1,7 @@
 <!-- grid-layout.component.html -->
 <app-card-input (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
 <div class="container">
+  
     <!-- Column 1 -->
     <div class="column c-todo">
         <span>ToDo</span><hr>
@@ -8,7 +9,7 @@
             <app-card [card]="card"></app-card>
         </div>
     </div>
-
+  
     <!-- Column 2 -->
     <div class="column c-prog">
         <span>In Progress</span><hr>

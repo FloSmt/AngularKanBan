@@ -1,7 +1,14 @@
-<div class="card">
-  <p class="id">#{{ card.id }}</p>
+<div class="card" (click)="openWindow()">
   <div class="content">
-    <h2 class="title">{{ card.title }}</h2>
-    <p>{{ card.content }}</p>
+    <div class="priority" [style.background-color]="card.priority.color"></div>
+    <div>
+      <div class="informationLine"><span class="id">#{{ card.id }}</span></div>
+      <div>
+        <h2 class="title">{{ card.title }}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="assigned">
+    <!--<div class="profilimg"></div>-->
   </div>
 </div>
