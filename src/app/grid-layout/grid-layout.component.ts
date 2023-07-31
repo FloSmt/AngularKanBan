@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from "../card";
 import { CardService } from '../card.service';
-import {CardComponent} from "../card/card.component";
 
 @Component({
   selector: 'app-grid-layout',
