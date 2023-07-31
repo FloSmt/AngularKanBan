@@ -39,14 +39,4 @@ export class PriorityService {
   public getPriorities():Priority[] {
     return this.priority;
   }
-
-  public addPriority(name:string, color:string) {
-    this.priority.push({id:this.priority.length,color:color,name:name})
-  }
-
-  public deletePriority(id:number) {
-    if (typeof this.priority.find(x => x.id === id) != "undefined") {
-      this.priority.splice(this.priority.indexOf(this.priority.find(x => x.id === id)!),1);
-    }
-  }
 }

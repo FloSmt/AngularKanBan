@@ -3,16 +3,24 @@ import { Injectable } from '@angular/core';
 import {Card} from "./card";
 import {PriorityService} from "./priority.service";
 import {Priority} from "./priority";
+import {StatusService} from "./status.service";
+import {Status} from "./status";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
 
-  private cards : Card[] = [];
+  private cards : Card[] = [{
+    id:0,
+    title:"test",
+    description:"",
+    priority: this.priorityService.getPriority(-1),
+    status: this.statusService.getStatus(0)
+  }];
 
-    addCard(title:string, description:string, columnIndex:number) {
-      const newCard: Card = {id: this.getNextId(), title:title, description:description,columnIndex:columnIndex, priority:this.priorityService.getPriority(-1)};
+    addCard(title:string, description:string, status:Status) {
+      const newCard: Card = {id: this.getNextId(), title:title, description:description, priority:this.priorityService.getPriority(-1), status: this.statusService.getStatus(0)};
       this.cards.push(newCard);
     }
 
@@ -24,7 +32,7 @@ export class CardService {
       return this.cards;
     }
 
-  constructor(private priorityService:PriorityService) { }
+  constructor(private priorityService:PriorityService, private statusService:StatusService) { }
 
 
   public setCard(card:Card):void {

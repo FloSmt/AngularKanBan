@@ -5,6 +5,9 @@ import {PriorityService} from "../priority.service";
 import {of} from "rxjs";
 import {Priority} from "../priority";
 import {AppComponent} from "../app.component";
+import {Status} from "../status";
+import {StatusService} from "../status.service";
+import {GridLayoutComponent} from "../grid-layout/grid-layout.component";
 
 @Component({
   selector: 'app-edit-card',
@@ -32,7 +35,11 @@ export class EditCardComponent implements AfterContentInit{
 
   protected readonly of = of;
 
-  constructor(public priorityService:PriorityService, private appComponent:AppComponent, private cardService:CardService) {
+  constructor(public priorityService:PriorityService,
+              public statusService:StatusService,
+              private appComponent:AppComponent,
+              private cardService:CardService) {
+
     this.card = appComponent.inCardEdit;
     console.log("constructor: ");
     console.log(appComponent.inCardEdit);
@@ -47,6 +54,7 @@ export class EditCardComponent implements AfterContentInit{
   tmpTitel!:string | null;
   tmpDescription!:string | null;
   tmpPriority!:Priority | null;
+  tmpStatus!:Status | null;
 
 
   public GetTitle():string {
@@ -62,6 +70,14 @@ export class EditCardComponent implements AfterContentInit{
       return this.tmpPriority
     }else {
       return  this.appComponent.inCardEdit.priority;
+    }
+  }
+
+  public GetStatus():Status {
+    if (this.tmpStatus) {
+      return this.tmpStatus
+    }else {
+      return  this.appComponent.inCardEdit.status;
     }
   }
   public GetDescription():string {
@@ -126,8 +142,14 @@ export class EditCardComponent implements AfterContentInit{
     this.closeSelection();
   }
 
+  selectStatus(status:Status) {
+    this.tmpStatus = status;
+    new GridLayoutComponent(this.cardService, this.statusService).updateColumns();
+    this.closeSelection();
+  }
+
   save() {
-    this.cardService.setCard({title:this.GetTitle(), priority:this.GetPriority(),description:this.GetDescription(),id:this.appComponent.inCardEdit.id, columnIndex:this.appComponent.inCardEdit.columnIndex})
+    this.cardService.setCard({title:this.GetTitle(), priority:this.GetPriority(),description:this.GetDescription(),id:this.appComponent.inCardEdit.id, status: this.GetStatus()})
     this.closeSelection()
     this.closeWindow();
   }

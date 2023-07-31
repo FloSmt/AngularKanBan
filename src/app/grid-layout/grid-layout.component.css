@@ -17,19 +17,19 @@
 }
 
 .c-todo {
-  border-top: 6px solid rgba(86, 89, 214, 0.7);
+  border-top: 6px solid;
 }
 
 .c-prog {
-  border-top: 6px solid rgba(58, 131, 186, 0.7);
+  border-top: 6px solid;
 }
 
 .c-test {
-  border-top: 6px solid rgba(239, 174, 84, 0.7);
+  border-top: 6px solid;
 }
 
 .c-done {
-  border-top: 6px solid rgba(90, 196, 124, 0.7);
+  border-top: 6px solid;
 }
 
 span {

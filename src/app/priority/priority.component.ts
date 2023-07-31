@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Priority} from "../priority";
-import {PriorityService} from "../priority.service";
 
 @Component({
   selector: 'app-priority',
@@ -9,6 +8,5 @@ import {PriorityService} from "../priority.service";
 })
 export class PriorityComponent {
   @Input() priority!:Priority;
-  protected readonly PriorityService = PriorityService;
 
 }
