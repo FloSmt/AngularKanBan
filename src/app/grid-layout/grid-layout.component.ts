@@ -11,4 +11,7 @@ export class GridLayoutComponent {
 
   protected readonly CardService = CardService;
   protected readonly PriorityService = PriorityService;
+
+  constructor(public cardService:CardService) {
+  }
 }

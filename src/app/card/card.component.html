@@ -1,9 +1,11 @@
-<div class="card">
+<div class="card" (click)="openWindow()">
   <div class="content">
-    <div class="priority" [style.background-color]="priority.color"></div>
+    <div class="priority" [style.background-color]="card.priority.color"></div>
     <div>
-      <div class="informationLine"><span class="id">#{{ id }}</span><span class=""></span></div>
-      <h2 class="title">{{ title }}</h2>
+      <div class="informationLine"><span class="id">#{{ card.id }}</span></div>
+      <div>
+        <h2 class="title">{{ card.title }}</h2>
+      </div>
     </div>
   </div>
   <div class="assigned">

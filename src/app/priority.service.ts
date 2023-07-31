@@ -21,14 +21,23 @@ export class PriorityService {
     },
     {
       id: 2,
-      color: "#00ff40",
+      color: "#22AA09",
       name: "LOW"
+    },
+    {
+      id: 3,
+      color: "#7100B8",
+      name: "IMPORTANT"
     }
   ];
   constructor() { }
 
   public getPriority(id:number):Priority {
     return (typeof this.priority.find(x => x.id === id) != "undefined") ? this.priority.find(x => x.id === id)! : this.default;
+  }
+
+  public getPriorities():Priority[] {
+    return this.priority;
   }
 
   public addPriority(name:string, color:string) {

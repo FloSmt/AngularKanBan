@@ -1,0 +1,69 @@
+<div #modalElement class="window" id="modalElement">
+  <div class="container">
+    <div class="close" (click)="closeWindow()">x</div>
+    <div class="firstbox">
+      <div class="content">
+        <div class="informationLine"><span class="id">#{{ GetId() }}</span></div>
+      </div>
+      <form action="">
+        <input id="titleinput" *ngIf="editTitle" type="text" value="{{GetTitle()}}">
+        <h1 *ngIf="!editTitle">{{GetTitle()}}</h1>
+        <button *ngIf="editTitle" class="edit button" (click)="saveTmpTitle()">Fertig</button>
+        <button *ngIf="!editTitle" class="edit button" (click)="openEditTitle()">Edit Title</button>
+      </form>
+    </div>
+    <div class="main">
+      <div class="description">
+        <div class="title">
+          <h2>Desciption</h2>
+          <button *ngIf="!editDescription" class="button" (click)="openEditDescription()">Edit</button>
+          <button *ngIf="editDescription" class="button" (click)="saveTmpDescription()">Fertig</button>
+        </div>
+        <div class="content" *ngIf="!editDescription"><p>{{GetDescription()}}</p></div>
+        <textarea type="text" *ngIf="editDescription" id="descriptioninput" value="{{GetDescription()}}"></textarea>
+      </div>
+      <div class="more">
+        <div class="component">
+          <p>Assignees:</p>
+          unset
+        </div>
+        <div class="component">
+          <p>Priority:</p>
+          <div class="nselected" *ngIf="prioritySelect" (click)="openPrioritySelection();" >
+            <app-priority [priority]="GetPriority()"></app-priority>
+          </div>
+          <div class="custom-select" *ngIf="!prioritySelect">
+            <div class="selected" (click)="closeSelection()">
+              <app-priority [priority]="GetPriority()"></app-priority>
+            </div>
+            <div class="options">
+              <div class="option" *ngFor="let p of priorityService.getPriorities()">
+                <app-priority [priority]="p" (click)="selectPriority(p)"></app-priority>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="component">
+          <p>Status:</p>
+          <div class="nselected" *ngIf="statusSelect" (click)="openStatusSelection();" >
+            <app-priority [priority]="GetPriority()"></app-priority>
+          </div>
+          <div class="custom-select" *ngIf="!statusSelect">
+            <div class="selected" (click)="closeSelection()">
+              <app-priority [priority]="GetPriority()"></app-priority>
+            </div>
+            <div class="options">
+              <div class="option" *ngFor="let p of priorityService.getPriorities()">
+                <app-priority [priority]="p" (click)="selectPriority(p)"></app-priority>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <button class="delete button"><span class="material-symbols-outlined">delete</span>Delete</button>
+      <button class="save button" (click)="save()">Save</button>
+    </div>
+  </div>
+</div>
