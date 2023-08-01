@@ -1,34 +1,34 @@
 <!-- grid-layout.component.html -->
 <app-card-input (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
 <div class="container">
-  
+
     <!-- Column 1 -->
-    <div class="column c-todo">
-        <span>ToDo</span><hr>
+    <div class="column c-todo" [style.border-color]="statusService.getStatus(0).color">
+        <span>{{statusService.getStatus(0).title}}</span><hr>
         <div *ngFor="let card of column1">
             <app-card [card]="card"></app-card>
         </div>
     </div>
-  
+
     <!-- Column 2 -->
-    <div class="column c-prog">
-        <span>In Progress</span><hr>
+    <div class="column c-prog" [style.border-color]="statusService.getStatus(1).color">
+        <span>{{statusService.getStatus(1).title}}</span><hr>
         <div *ngFor="let card of column2">
             <app-card [card]="card"></app-card>
         </div>
     </div>
 
     <!-- Column 3 -->
-    <div class="column c-test">
-        <span>Test</span><hr>
+    <div class="column c-test" [style.border-color]="statusService.getStatus(2).color">
+        <span>{{statusService.getStatus(2).title}}</span><hr>
         <div *ngFor="let card of column3">
             <app-card [card]="card"></app-card>
         </div>
     </div>
 
     <!-- Column 4 -->
-    <div class="column c-done">
-        <span>Done</span><hr>
+    <div class="column c-done" [style.border-color]="statusService.getStatus(3).color">
+        <span>{{statusService.getStatus(3).title}}</span><hr>
         <div *ngFor="let card of column4">
             <app-card [card]="card"></app-card>
         </div>

@@ -1,6 +1,5 @@
 <div class="container">
     <input [(ngModel)]="title" placeholder="Titel" required>
     <textarea [(ngModel)]="content" placeholder="description" required></textarea>
-    <input type="number" [(ngModel)]="columnIndex" min="1" max="4" required title="Spaltenindex 1-4">
     <button (click)="addNewCard()">Add Card</button>
 </div>

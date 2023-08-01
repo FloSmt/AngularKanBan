@@ -15,7 +15,7 @@ describe('CardService', () => {
   });
 
   it('should be edited', () => {
-    service.addCard({id:1,title:"t4st",description:"fdfdfdf",priority:{id: 1,color: "#ffbf00", name: "MEDIUM"}})
+    service.addCard("t4st","test")
     expect(service.getCards()).toHaveSize(2);
   });
 });

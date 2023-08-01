@@ -1,9 +1,10 @@
 import {Priority} from "./priority";
+import {Status} from "./status";
 
 export interface Card {
   id: number,
   title: string,
   priority: Priority,
-  description: string,
-  columnIndex: number;
+  status: Status,
+  description: string;
 }

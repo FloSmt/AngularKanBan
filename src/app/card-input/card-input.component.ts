@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Status} from "../status";
+import {StatusService} from "../status.service";
 
 @Component({
   selector: 'app-card-input',
@@ -7,12 +9,15 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 
 export class CardInputComponent {
-  @Input() columnIndex: number = 0;
-  @Output() addCardToColumn = new EventEmitter<{columnIndex:number; title:string; content:string}>();
+  @Output() addCardToColumn = new EventEmitter<{status:Status; title:string; content:string}>();
   title: string = '';
   content: string = '';
 
+  constructor(private statusService:StatusService) {
+  }
+
+
   addNewCard() {
-    this.addCardToColumn.emit({columnIndex: this.columnIndex, title:this.title, content:this.content});
+    this.addCardToColumn.emit({status: this.statusService.getStatus(0), title:this.title, content:this.content});
   }
 }

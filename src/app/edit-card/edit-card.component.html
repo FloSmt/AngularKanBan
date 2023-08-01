@@ -19,9 +19,11 @@
           <button *ngIf="!editDescription" class="button" (click)="openEditDescription()">Edit</button>
           <button *ngIf="editDescription" class="button" (click)="saveTmpDescription()">Fertig</button>
         </div>
-        <div class="content" *ngIf="!editDescription"><p>{{GetDescription()}}</p></div>
-        <textarea type="text" *ngIf="editDescription" id="descriptioninput" value="{{GetDescription()}}"></textarea>
+        <div class="content" *ngIf="!editDescription && GetDescription().length > 0"><p>{{GetDescription()}}</p></div>
+        <div class="content" *ngIf="!editDescription && GetDescription().length == 0"><p><span>no description provided</span></p></div>
+        <textarea type="text" maxlength="1500" *ngIf="editDescription" id="descriptioninput" value="{{GetDescription()}}"></textarea>
       </div>
+      <div class="line"></div>
       <div class="more">
         <div class="component">
           <p>Assignees:</p>
@@ -46,15 +48,15 @@
         <div class="component">
           <p>Status:</p>
           <div class="nselected" *ngIf="statusSelect" (click)="openStatusSelection();" >
-            <app-priority [priority]="GetPriority()"></app-priority>
+            <app-status [status]="GetStatus()"></app-status>
           </div>
           <div class="custom-select" *ngIf="!statusSelect">
             <div class="selected" (click)="closeSelection()">
-              <app-priority [priority]="GetPriority()"></app-priority>
+              <app-status [status]="GetStatus()"></app-status>
             </div>
             <div class="options">
-              <div class="option" *ngFor="let p of priorityService.getPriorities()">
-                <app-priority [priority]="p" (click)="selectPriority(p)"></app-priority>
+              <div class="option" *ngFor="let s of statusService.getStatusList()">
+                <app-status [status]="s" (click)="selectStatus(s)"></app-status>
               </div>
             </div>
           </div>
