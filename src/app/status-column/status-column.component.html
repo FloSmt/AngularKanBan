@@ -1,0 +1,13 @@
+<div class="column" [style.border-color]="status.color">
+  <div class="title" [style.background-color]="status.color + '4d'" (click)="openEdit()">
+    <div><span>{{status.title}}</span></div>
+    <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="status.limit">{{cardService.getCardsWithStatus(status).length}}/{{status.max}}</div>
+  </div>
+  <hr>
+  <div class="cards" *ngFor="let card of cardService.getCardsWithStatus(status)">
+    <app-card [card]="card"></app-card>
+  </div>
+</div>
+
+
+<app-edit-status [status]="status"></app-edit-status>

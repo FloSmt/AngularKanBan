@@ -13,6 +13,8 @@ import {FormsModule} from "@angular/forms";
 import {CardService} from "./card.service";
 import { EditCardComponent } from './edit-card/edit-card.component';
 import { PriorityComponent } from './priority/priority.component';
+import { StatusColumnComponent } from './status-column/status-column.component';
+import { EditStatusComponent } from './edit-status/edit-status.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { PriorityComponent } from './priority/priority.component';
     StatusComponent,
     CardInputComponent,
     EditCardComponent,
-    PriorityComponent
+    PriorityComponent,
+    StatusColumnComponent,
+    EditStatusComponent
   ],
   imports: [
     BrowserModule,

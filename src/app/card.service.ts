@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {Card} from "./card";
 import {PriorityService} from "./priority.service";
 import {StatusService} from "./status.service";
+import {Status} from "./status";
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +51,6 @@ export class CardService {
     this.cards.find(x=>x.id == card.id)!.priority = card.priority;
     this.cards.find(x=>x.id == card.id)!.description = card.description;
     this.cards.find(x=>x.id == card.id)!.title = card.title;
-
   }
 
   public deleteCard(id:number) {
@@ -63,6 +63,18 @@ export class CardService {
     var index: number = this.cards.indexOf(card);
 
     this.cards.splice(index, 1);
+  }
+
+  public getCardsWithStatus(status:Status):Card[] {
+    let cards1:Card[] = [];
+
+    // @ts-ignore
+    for (const card:Card of this.cards) {
+      if (card.status === status) {
+        cards1.push(card);
+      }
+    }
+    return cards1;
   }
 
 }

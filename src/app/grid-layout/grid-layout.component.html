@@ -3,34 +3,14 @@
 <div class="container">
 
     <!-- Column 1 -->
-    <div class="column c-todo" [style.border-color]="statusService.getStatus(0).color">
-        <span>{{statusService.getStatus(0).title}}</span><hr>
-        <div *ngFor="let card of cardService.column1">
-            <app-card [card]="card"></app-card>
-        </div>
-    </div>
+  <app-status-column [status]="statusService.getStatus(0)"></app-status-column>
 
     <!-- Column 2 -->
-    <div class="column c-prog" [style.border-color]="statusService.getStatus(1).color">
-        <span>{{statusService.getStatus(1).title}}</span><hr>
-        <div *ngFor="let card of cardService.column2">
-            <app-card [card]="card"></app-card>
-        </div>
-    </div>
+  <app-status-column [status]="statusService.getStatus(1)"></app-status-column>
 
     <!-- Column 3 -->
-    <div class="column c-test" [style.border-color]="statusService.getStatus(2).color">
-        <span>{{statusService.getStatus(2).title}}</span><hr>
-        <div *ngFor="let card of cardService.column3">
-            <app-card [card]="card"></app-card>
-        </div>
-    </div>
+  <app-status-column [status]="statusService.getStatus(2)"></app-status-column>
 
     <!-- Column 4 -->
-    <div class="column c-done" [style.border-color]="statusService.getStatus(3).color">
-        <span>{{statusService.getStatus(3).title}}</span><hr>
-        <div *ngFor="let card of cardService.column4">
-            <app-card [card]="card"></app-card>
-        </div>
-    </div>
+  <app-status-column [status]="statusService.getStatus(3)"></app-status-column>
 </div>

@@ -144,10 +144,12 @@ export class EditCardComponent{
 
   //schließt alle selections/inputs
   closeSelection() {
-    this.prioritySelect = true;
-    this.statusSelect = true;
-    this.editTitle = false;
-    this.editDescription = false;
+    if (!this.prioritySelect || !this.statusSelect || this.editTitle || this.editDescription) {
+      this.prioritySelect = true;
+      this.statusSelect = true;
+      this.editTitle = false;
+      this.editDescription = false;
+    }
   }
 
   //speichert eine ausgewählte Priorität temporär ab

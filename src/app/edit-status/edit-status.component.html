@@ -1,0 +1,22 @@
+<div class="window" id="{{status.id}}">
+  <div class="container">
+    <div class="close" (click)="closeEdit()">x</div>
+    <div class="firstbox">
+      <div class="content">
+        <div class="informationLine"><span class="id">Edit Status Column</span></div>
+      </div>
+      <form action="">
+        <input id="titleinput" type="text" *ngIf="editTitle" value="{{GetTitle()}}">
+        <h1 *ngIf="!editTitle">{{GetTitle()}}</h1>
+        <button *ngIf="editTitle" class="edit button" (click)="saveTmpTitle()">Fertig</button>
+        <button *ngIf="!editTitle" class="edit button" (click)="openEditTitle()">Edit Title</button>
+      </form>
+    </div>
+    <div class="main">
+
+    </div>
+    <div class="footer">
+      <button class="save button" (click)="save()">Save</button>
+    </div>
+  </div>
+</div>
