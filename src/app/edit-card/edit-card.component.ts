@@ -1,4 +1,4 @@
-import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnInit, AfterContentInit} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Card} from "../card";
 import {CardService} from "../card.service";
 import {PriorityService} from "../priority.service";
@@ -27,13 +27,6 @@ export class EditCardComponent{
 
   }
 
-  openWindow() {
-    const modalElement = document.getElementById('modalElement');
-    if (modalElement) {
-      modalElement.style.display = 'flex';
-    }
-  }
-
   protected readonly of = of;
 
   constructor(public priorityService:PriorityService,
@@ -58,6 +51,15 @@ export class EditCardComponent{
   tmpStatus!:Status | null;
 
 
+  //öffnet das Editor menu für die aktuelle Card
+  openWindow() {
+    const modalElement = document.getElementById('modalElement');
+    if (modalElement) {
+      modalElement.style.display = 'flex';
+    }
+  }
+
+  //gibt den Titel des Originals bzw. der Temporären ungespeicherten Card zurück
   public GetTitle():string {
     if (this.tmpTitel) {
       return this.tmpTitel
@@ -66,6 +68,7 @@ export class EditCardComponent{
     }
   }
 
+  //gibt die Priorität des Originals bzw. der Temporären ungespeicherten Card zurück
   public GetPriority():Priority {
     if (this.tmpPriority) {
       return this.tmpPriority;
@@ -74,6 +77,7 @@ export class EditCardComponent{
     }
   }
 
+  //gibt den Status des Originals bzw. der Temporären ungespeicherten Card zurück
   public GetStatus():Status {
     if (this.tmpStatus) {
       return this.tmpStatus;
@@ -81,6 +85,8 @@ export class EditCardComponent{
       return  this.appComponent.inCardEdit.status;
     }
   }
+
+  //gibt die Beschreibung des Originals bzw. der Temporären ungespeicherten Card zurück
   public GetDescription():string {
     let desc: string = "";
     if (this.tmpDescription != null && this.tmpDescription.length > 0) {
@@ -92,17 +98,18 @@ export class EditCardComponent{
     return desc;
   }
 
-
+  //gibt die ID der Card zurück, die editiert wird
   public GetId():number {
     return  this.appComponent.inCardEdit.id;
   }
 
+  //öffnet den input zum Titel edit
   openEditTitle() {
     this.closeSelection()
     this.editTitle = true;
-    document.getElementById("titleinput")!.focus();
   }
 
+  //speichert den geänderten Titel temporär ab
   saveTmpTitle() {
     if (typeof (<HTMLInputElement>document.getElementById("titleinput")).value) {
       this.tmpTitel = (<HTMLInputElement>document.getElementById("titleinput")).value;
@@ -111,27 +118,31 @@ export class EditCardComponent{
     this.closeSelection();
   }
 
+  //speichert die geänderte Beschreibung temporär ab
   saveTmpDescription() {
     this.tmpDescription = (<HTMLInputElement>document.getElementById("descriptioninput")).value;
 
     this.closeSelection();
   }
 
+  //öffnet den input, um die Beschreibung zu ändern
   openEditDescription() {
     this.closeSelection()
     this.editDescription = true;
   }
 
+  //öffnet das Prioritätselectionmenu
   openPrioritySelection() {
     this.closeSelection();
    this.prioritySelect = false;
   }
-
+  //öffnet das Statusselectionmenu
   openStatusSelection() {
     this.closeSelection();
     this.statusSelect = false;
   }
 
+  //schließt alle selections/inputs
   closeSelection() {
     this.prioritySelect = true;
     this.statusSelect = true;
@@ -139,21 +150,32 @@ export class EditCardComponent{
     this.editDescription = false;
   }
 
+  //speichert eine ausgewählte Priorität temporär ab
   selectPriority(priority:Priority) {
     this.tmpPriority = priority;
     this.closeSelection();
   }
 
+  //speichert einen ausgewählten Status temporär ab
   selectStatus(status:Status) {
     this.tmpStatus = status;
     this.closeSelection();
   }
 
+  //übernimmt alle temporären änderungen in die card
   save() {
-    var saveCard:Card = {title:this.GetTitle(), priority:this.GetPriority(),description:this.GetDescription(),id:this.appComponent.inCardEdit.id, status: this.GetStatus()};
+    var saveCard:Card = {title:this.GetTitle(), priority:this.GetPriority(),description:this.GetDescription(),id:this.GetId(), status: this.GetStatus()};
     this.cardService.setCard(saveCard)
     console.log(saveCard);
     this.closeSelection()
     this.closeWindow();
+    this.cardService.updateColumns();
+  }
+
+  //löscht die Card
+  delete() {
+    this.cardService.deleteCard(this.GetId());
+    this.closeWindow();
+    this.cardService.updateColumns();
   }
 }

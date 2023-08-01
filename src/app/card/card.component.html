@@ -1,4 +1,4 @@
-<div class="card" (click)="openWindow()">
+<div class="card" (click)="openWindow()" [style.background-color]="card.priority.color + '1b'" [style.border-color]="card.priority.color + '5b'">
   <div class="content">
     <div class="priority" [style.background-color]="card.priority.color"></div>
     <div>
