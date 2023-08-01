@@ -12,7 +12,13 @@ export class CardService {
   private cards : Card[] = [];
 
     addCard(title:string, description:string, columnIndex:number) {
-      const newCard: Card = {id: this.getNextId(), title:title, description:description,columnIndex:columnIndex, priority:this.priorityService.getPriority(-1)};
+      const newCard: Card = {
+        id: this.getNextId(),
+        title:title,
+        description:description,
+        columnIndex:columnIndex,
+        priority:this.priorityService.getPriority(-1)};
+
       this.cards.push(newCard);
     }
 
@@ -25,7 +31,6 @@ export class CardService {
     }
 
   constructor(private priorityService:PriorityService) { }
-
 
   public setCard(card:Card):void {
     this.cards.find(x=>x.id == card.id)!.priority = card.priority;

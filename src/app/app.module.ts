@@ -13,6 +13,8 @@ import {FormsModule} from "@angular/forms";
 import {CardService} from "./card.service";
 import { EditCardComponent } from './edit-card/edit-card.component';
 import { PriorityComponent } from './priority/priority.component';
+import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
+
 
 
 @NgModule({
@@ -28,7 +30,10 @@ import { PriorityComponent } from './priority/priority.component';
   imports: [
     BrowserModule,
     HeaderComponent,
-    FormsModule
+    FormsModule,
+    CdkDrag,
+    CdkDropList,
+    CdkDropListGroup
   ],
   providers: [CardService],
   bootstrap: [AppComponent]

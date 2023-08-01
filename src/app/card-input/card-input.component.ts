@@ -7,12 +7,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 
 export class CardInputComponent {
-  @Input() columnIndex: number = 0;
+  @Input() columnIndex!: number;
   @Output() addCardToColumn = new EventEmitter<{columnIndex:number; title:string; content:string}>();
   title: string = '';
   content: string = '';
 
   addNewCard() {
     this.addCardToColumn.emit({columnIndex: this.columnIndex, title:this.title, content:this.content});
+    this.title = '';
+    this.content = '';
   }
 }

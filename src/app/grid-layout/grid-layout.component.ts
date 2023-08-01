@@ -1,14 +1,15 @@
-
 // grid-layout.component.ts
-import { Component, OnInit } from '@angular/core';
-import { Card } from "../card";
-import { CardService } from '../card.service';
+import {Component, OnInit} from '@angular/core';
+import {Card} from "../card";
+import {CardService} from '../card.service';
 import {PriorityService} from "../priority.service";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-grid-layout',
   templateUrl: './grid-layout.component.html',
-  styleUrls: ['./grid-layout.component.css']
+  styleUrls: ['./grid-layout.component.css'],
 })
 
 export class GridLayoutComponent implements OnInit {
@@ -19,9 +20,7 @@ export class GridLayoutComponent implements OnInit {
   column4: Card[] = [];
 
 
-  constructor(public cardService: CardService) {
-
-  }
+  constructor(public cardService: CardService) {}
 
   protected readonly CardService = CardService;
   protected readonly PriorityService = PriorityService;
@@ -43,5 +42,27 @@ export class GridLayoutComponent implements OnInit {
     this.column2 = cards.filter((card) => card.columnIndex === 2);
     this.column3 = cards.filter((card) => card.columnIndex === 3);
     this.column4 = cards.filter((card) => card.columnIndex === 4);
+  }
+
+  onCardDrop(event: CdkDragDrop<Card[]>) {
+    if(event.previousContainer === event.container) {
+      moveItemInArray(event.container.data,event.previousIndex, event.currentIndex);
+    }
+    else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+      const card = event.item.data;
+      const newColumnIndexAttr = event.container.element.nativeElement.getAttribute('data-column-index');
+      const newColumnIndex = newColumnIndexAttr !== null ? newColumnIndexAttr:1;
+
+      if(card) {
+        card.columnIndex = newColumnIndex;
+        this.updateColumns();
+      }
+    }
   }
 }

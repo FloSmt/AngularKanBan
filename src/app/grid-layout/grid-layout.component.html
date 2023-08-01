@@ -1,36 +1,38 @@
 <!-- grid-layout.component.html -->
-<app-card-input (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
+<app-card-input [columnIndex]="1" (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
+<div cdkDropListGroup>
 <div class="container">
-  
+
     <!-- Column 1 -->
-    <div class="column c-todo">
+    <div class="column c-todo" cdkDropList [cdkDropListData]="column1" data-column-index="1"  (cdkDropListDropped)="onCardDrop($event)">
         <span>ToDo</span><hr>
-        <div *ngFor="let card of column1">
+        <div *ngFor="let card of column1" cdkDrag [cdkDragData]="card">
             <app-card [card]="card"></app-card>
         </div>
     </div>
-  
+
     <!-- Column 2 -->
-    <div class="column c-prog">
+    <div class="column c-prog" cdkDropList [cdkDropListData]="column2"  data-column-index="2" (cdkDropListDropped)="onCardDrop($event)">
         <span>In Progress</span><hr>
-        <div *ngFor="let card of column2">
+        <div *ngFor="let card of column2" cdkDrag [cdkDragData]="card">
             <app-card [card]="card"></app-card>
         </div>
     </div>
 
     <!-- Column 3 -->
-    <div class="column c-test">
+    <div class="column c-test" cdkDropList [cdkDropListData]="column3" data-column-index="3" (cdkDropListDropped)="onCardDrop($event)">
         <span>Test</span><hr>
-        <div *ngFor="let card of column3">
+        <div *ngFor="let card of column3" cdkDrag [cdkDragData]="card">
             <app-card [card]="card"></app-card>
         </div>
     </div>
 
     <!-- Column 4 -->
-    <div class="column c-done">
+    <div class="column c-done" cdkDropList [cdkDropListData]="column4" data-column-index="4" (cdkDropListDropped)="onCardDrop($event)">
         <span>Done</span><hr>
-        <div *ngFor="let card of column4">
+        <div *ngFor="let card of column4" cdkDrag [cdkDragData]="card">
             <app-card [card]="card"></app-card>
         </div>
     </div>
+</div>
 </div>
