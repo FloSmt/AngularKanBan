@@ -14,7 +14,7 @@ import {GridLayoutComponent} from "../grid-layout/grid-layout.component";
   templateUrl: './edit-card.component.html',
   styleUrls: ['./edit-card.component.css']
 })
-export class EditCardComponent implements AfterContentInit{
+export class EditCardComponent{
   @ViewChild('modalElement') modalelement!:ElementRef;
 
   card!:Card;
@@ -23,6 +23,7 @@ export class EditCardComponent implements AfterContentInit{
     this.tmpDescription = null;
     this.tmpTitel = null;
     this.tmpPriority = null;
+    this.tmpStatus = null;
 
   }
 
@@ -67,7 +68,7 @@ export class EditCardComponent implements AfterContentInit{
 
   public GetPriority():Priority {
     if (this.tmpPriority) {
-      return this.tmpPriority
+      return this.tmpPriority;
     }else {
       return  this.appComponent.inCardEdit.priority;
     }
@@ -75,16 +76,16 @@ export class EditCardComponent implements AfterContentInit{
 
   public GetStatus():Status {
     if (this.tmpStatus) {
-      return this.tmpStatus
+      return this.tmpStatus;
     }else {
       return  this.appComponent.inCardEdit.status;
     }
   }
   public GetDescription():string {
     let desc: string = "";
-    if (this.tmpDescription != null && this.tmpDescription.length >= 0) {
+    if (this.tmpDescription != null && this.tmpDescription.length > 0) {
       desc = this.tmpDescription!;
-    }else {
+    }else if(this.appComponent.inCardEdit.description.length > 0) {
       desc = this.appComponent.inCardEdit.description;
     }
 
@@ -99,6 +100,7 @@ export class EditCardComponent implements AfterContentInit{
   openEditTitle() {
     this.closeSelection()
     this.editTitle = true;
+    document.getElementById("titleinput")!.focus();
   }
 
   saveTmpTitle() {
@@ -144,17 +146,14 @@ export class EditCardComponent implements AfterContentInit{
 
   selectStatus(status:Status) {
     this.tmpStatus = status;
-    new GridLayoutComponent(this.cardService, this.statusService).updateColumns();
     this.closeSelection();
   }
 
   save() {
-    this.cardService.setCard({title:this.GetTitle(), priority:this.GetPriority(),description:this.GetDescription(),id:this.appComponent.inCardEdit.id, status: this.GetStatus()})
+    var saveCard:Card = {title:this.GetTitle(), priority:this.GetPriority(),description:this.GetDescription(),id:this.appComponent.inCardEdit.id, status: this.GetStatus()};
+    this.cardService.setCard(saveCard)
+    console.log(saveCard);
     this.closeSelection()
     this.closeWindow();
-  }
-
-  ngAfterContentInit():void {
-
   }
 }

@@ -6,7 +6,7 @@ import {Priority} from "./priority";
 })
 export class PriorityService {
 
-  default:Priority = {id:-1,color:"grey",name:"UNSET"};
+  default:Priority = {id:-1,color:"#808080",name:"UNSET"};
 
   priority:Priority[] = [
     {

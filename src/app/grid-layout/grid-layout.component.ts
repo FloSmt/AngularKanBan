@@ -5,7 +5,6 @@ import { Card } from "../card";
 import { CardService } from '../card.service';
 import {PriorityService} from "../priority.service";
 import {StatusService} from "../status.service";
-import {Status} from "../status";
 
 @Component({
   selector: 'app-grid-layout',
@@ -33,9 +32,9 @@ export class GridLayoutComponent implements OnInit {
   }
 
   // Method to add a new card to the specified column
-  addNewCardToColumn(event: { status: Status; title: string; content: string }) {
-    const {title, content, status} = event;
-    this.cardService.addCard(title, content, status);
+  addNewCardToColumn(event: { title: string; content: string }) {
+    const {title, content} = event;
+    this.cardService.addCard(title, content);
     this.updateColumns();
   }
 

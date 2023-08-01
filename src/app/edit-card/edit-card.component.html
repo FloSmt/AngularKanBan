@@ -19,9 +19,11 @@
           <button *ngIf="!editDescription" class="button" (click)="openEditDescription()">Edit</button>
           <button *ngIf="editDescription" class="button" (click)="saveTmpDescription()">Fertig</button>
         </div>
-        <div class="content" *ngIf="!editDescription"><p>{{GetDescription()}}</p></div>
-        <textarea type="text" *ngIf="editDescription" id="descriptioninput" value="{{GetDescription()}}"></textarea>
+        <div class="content" *ngIf="!editDescription && GetDescription().length > 0"><p>{{GetDescription()}}</p></div>
+        <div class="content" *ngIf="!editDescription && GetDescription().length == 0"><p><span>no description provided</span></p></div>
+        <textarea type="text" maxlength="1500" *ngIf="editDescription" id="descriptioninput" value="{{GetDescription()}}"></textarea>
       </div>
+      <div class="line"></div>
       <div class="more">
         <div class="component">
           <p>Assignees:</p>
