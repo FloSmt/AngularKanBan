@@ -1,23 +1,20 @@
 .container {
   border: 0;
-  margin: 1em 1em 1em 1em;
-  width: auto;
-  padding: 0 1em 1em 1em;
-  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  height: 4rem;
+  background-color: #f0f0f0;
+  align-items: center;
+  justify-content: center;
 }
 
 input {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  min-width: 100%;
   border: 1px solid #adadad;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 1em;
   box-shadow: 0 0 6px #a8a8a8;
-  margin-top: 1em;
-  margin-bottom: 1em;
-
+  margin: 1em 3em 1em 1em;
+  padding: 0.4em;
   text-align: center;
   outline: 0;
 }
@@ -27,20 +24,19 @@ input :hover {
   outline-offset: inherit;
 }
 
-button {
-  background-color: #efefef;
-  border: none;
-  border-radius: 10px;
-  color: #000000;
-  padding: 8px;
-  text-align: center;
-  text-decoration: none;
-  display: block;
-  font-size: 16px;
-  width: 100%;
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #87ee78;
+  color: #5b5b5b;
 }
 
 button:hover {
-  background-color: #cbcbcb;
   cursor: pointer;
+  color: #ffffff;
 }
