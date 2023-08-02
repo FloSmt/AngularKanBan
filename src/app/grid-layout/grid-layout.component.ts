@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {CardService} from '../card.service';
 import {PriorityService} from "../priority.service";
 import {StatusService} from "../status.service";
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Card} from "../card";
 
 @Component({
@@ -32,23 +31,4 @@ export class GridLayoutComponent implements OnInit {
     this.cardService.updateColumns();
   }
 
-  setCardStatusBasedOnColumn(card:Card, columnIndex:number) {
-    card.status = this.statusService.getStatus(columnIndex);
-  }
-
-  drop(event: CdkDragDrop<Card[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      const cardToMove = event.previousContainer.data[event.previousIndex];
-      const targetColumnIndex = +event.container.id.split('-')[1];
-      this.setCardStatusBasedOnColumn(cardToMove,targetColumnIndex);
-      transferArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex,
-      );
-    }
-  }
 }

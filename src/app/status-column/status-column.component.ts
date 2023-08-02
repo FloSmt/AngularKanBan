@@ -2,6 +2,9 @@ import {Component, Input} from '@angular/core';
 import {CardService} from "../card.service";
 import {StatusService} from "../status.service";
 import {Status} from "../status";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {Card} from "../card";
+
 
 @Component({
   selector: 'app-status-column',
@@ -27,6 +30,28 @@ export class StatusColumnComponent {
     const statusedit = document.getElementById(this.status.id.toString());
     if (statusedit) {
       statusedit.style.display = 'flex';
+    }
+  }
+
+  setCardStatusBasedOnColumn(card:Card, columnIndex:number) {
+    card.status = this.statusService.getStatus(columnIndex);
+  }
+
+
+  drop(event: CdkDragDrop<Card[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      const cardToMove = event.previousContainer.data[event.previousIndex];
+      const targetColumnIndex = +event.container.id.split('-')[1];
+      console.log(targetColumnIndex);
+      this.setCardStatusBasedOnColumn(cardToMove,targetColumnIndex);
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
     }
   }
 }
