@@ -13,6 +13,8 @@ import {FormsModule} from "@angular/forms";
 import {CardService} from "./card.service";
 import { EditCardComponent } from './edit-card/edit-card.component';
 import { PriorityComponent } from './priority/priority.component';
+import { StatusColumnComponent } from './status-column/status-column.component';
+import { EditStatusComponent } from './edit-status/edit-status.component';
 import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
 
 
@@ -24,7 +26,9 @@ import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
     StatusComponent,
     CardInputComponent,
     EditCardComponent,
-    PriorityComponent
+    PriorityComponent,
+    StatusColumnComponent,
+    EditStatusComponent
   ],
   imports: [
     BrowserModule,

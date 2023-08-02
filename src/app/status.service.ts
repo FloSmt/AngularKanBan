@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Status} from "./status";
+import {Card} from "./card";
 
 @Injectable({
   providedIn: 'root'
@@ -10,22 +11,30 @@ export class StatusService {
     {
       id: 0,
       color: "#c143ff",
-      title: "ToDo"
+      title: "ToDo",
+      limit: true,
+      max: 1
     },
     {
       id: 1,
       color: "#1fc2ff",
-      title: "In Progress"
+      title: "In Progress",
+      limit: true,
+      max: 4
     },
     {
       id: 2,
       color: "#ffc634",
-      title: "Test"
+      title: "Test",
+      limit: true,
+      max: 3
     },
     {
       id: 3,
       color: "#1ab802",
-      title: "Done"
+      title: "Done",
+      limit: false,
+      max: 0
     }
   ];
   constructor() { }
@@ -36,5 +45,12 @@ export class StatusService {
 
   public getStatusList():Status[] {
     return this.status;
+  }
+
+  public setStatus(status:Status):void {
+    this.status.find(x=>x.id == status.id)!.color = status.color;
+    this.status.find(x=>x.id == status.id)!.limit = status.limit;
+    this.status.find(x=>x.id == status.id)!.max = status.max;
+    this.status.find(x=>x.id == status.id)!.title = status.title;
   }
 }
