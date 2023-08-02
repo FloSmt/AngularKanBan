@@ -7,7 +7,6 @@ import {Priority} from "../priority";
 import {AppComponent} from "../app.component";
 import {Status} from "../status";
 import {StatusService} from "../status.service";
-import {GridLayoutComponent} from "../grid-layout/grid-layout.component";
 
 @Component({
   selector: 'app-edit-card',
@@ -171,13 +170,11 @@ export class EditCardComponent{
     console.log(saveCard);
     this.closeSelection()
     this.closeWindow();
-    this.cardService.updateColumns();
   }
 
   //löscht die Card
   delete() {
     this.cardService.deleteCard(this.GetId());
     this.closeWindow();
-    this.cardService.updateColumns();
   }
 }
