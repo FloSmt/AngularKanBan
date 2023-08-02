@@ -47,7 +47,7 @@ export class StatusColumnComponent {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       const cardToMove = event.previousContainer.data[event.previousIndex];
-      const targetColumnIndex = +event.container.id.split('-')[1];;
+      const targetColumnIndex = +event.container.id.split('-')[1];
       this.setCardStatusBasedOnColumn(cardToMove,targetColumnIndex);
       transferArrayItem(
         event.previousContainer.data,
@@ -56,5 +56,12 @@ export class StatusColumnComponent {
         event.currentIndex,
       );
     }
+  }
+
+  addNewCardToColumn(event: { id: string; title: string; content: string }) {
+    const targetColumnIndex: number = parseInt(event.id.split('-')[1]);
+    this.cardService.addCard(event.title,event.content);
+    this.setCardStatusBasedOnColumn(this.cardService.getCards()[this.cardService.getCards().length-1],targetColumnIndex);
+    //console.log(targetColumnIndex);
   }
 }
