@@ -20,6 +20,5 @@ export class GridLayoutComponent implements OnInit {
   protected readonly PriorityService = PriorityService;
 
   ngOnInit() {
-    this.cardService.updateColumns();
   }
 }

@@ -3,12 +3,19 @@
   <div class="title" [style.background-color]="status.color + '4d'" (click)="openEdit()">
     <div><span>{{status.title}}</span></div>
     <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="status.limit">{{cardService.getCardsWithStatus(status).length}}/{{status.max}}</div>
+    <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="!status.limit">{{cardService.getCardsWithStatus(status).length}}</div>
   </div>
   <app-card-input [id]="'column-'+status.id" (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
   <hr>
-  <div class="cards box" *ngFor="let card of cardService.getCardsWithStatus(status);let i = index" cdkDrag [cdkDragData]="card">
-    <hr class="priorityhr" *ngIf=" i!=0 && (cardService.getCardsWithStatus(status)[i-1].priority != cardService.getCardsWithStatus(status)[i].priority)">
-    <app-card [card]="card"></app-card>
+  <div class="cards box" *ngFor="let card of cardService.getCardsWithStatus(status);let i = index">
+    <div class="priorityhr"  *ngIf=" i==0 || (cardService.getCardsWithStatus(status)[i-1].priority != cardService.getCardsWithStatus(status)[i].priority)">
+      <hr>
+      <p [style.color]="cardService.getCardsWithStatus(status)[i].priority.color">{{cardService.getCardsWithStatus(status)[i].priority.name}}</p>
+      <hr>
+    </div>
+    <div class="box"  cdkDrag [cdkDragData]="card">
+      <app-card [card]="card"></app-card>
+    </div>
   </div>
 </div>
 

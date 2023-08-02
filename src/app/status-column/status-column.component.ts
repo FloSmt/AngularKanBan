@@ -19,8 +19,12 @@ export class StatusColumnComponent {
   }
 
   getColor(status:Status):string {
-    if (this.cardService.getCardsWithStatus(status).length > status.max) {
-      return "#f83000";
+    if (status.limit) {
+      if (this.cardService.getCardsWithStatus(status).length > status.max) {
+        return "#f83000";
+      }else {
+        return "#9f9f9f";
+      }
     }else {
       return "#9f9f9f";
     }
