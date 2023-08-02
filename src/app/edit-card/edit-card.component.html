@@ -3,7 +3,7 @@
     <div class="close" (click)="closeWindow()">x</div>
     <div class="firstbox">
       <div class="content">
-        <div class="informationLine"><span class="id">#{{ GetId() }}</span></div>
+        <div class="informationLine"><span class="id">#{{ GetId() }}</span><span class="createdate">(created {{ time_ago(GetCreateDate()) }})</span></div>
       </div>
       <form action="">
         <input id="titleinput" *ngIf="editTitle" type="text" value="{{GetTitle()}}">
@@ -15,7 +15,7 @@
     <div class="main">
       <div class="description">
         <div class="title">
-          <h2>Desciption</h2>
+          <h2>Desciption<span *ngIf="GetEditedDate()">{{ time_ago(GetEditedDate()) }} (edited)</span></h2>
           <button *ngIf="!editDescription" class="button" (click)="openEditDescription()">Edit</button>
           <button *ngIf="editDescription" class="button" (click)="saveTmpDescription()">Fertig</button>
         </div>

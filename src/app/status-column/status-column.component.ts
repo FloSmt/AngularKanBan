@@ -38,7 +38,7 @@ export class StatusColumnComponent {
   }
 
   setCardStatusBasedOnColumn(card:Card, columnIndex:number) {
-    card.status = this.statusService.getStatus(columnIndex);
+    this.cardService.setStatus(card, this.statusService.getStatus(columnIndex));
   }
 
 
@@ -62,6 +62,5 @@ export class StatusColumnComponent {
     const targetColumnIndex: number = parseInt(event.id.split('-')[1]);
     this.cardService.addCard(event.title,event.content);
     this.setCardStatusBasedOnColumn(this.cardService.getCards()[this.cardService.getCards().length-1],targetColumnIndex);
-    //console.log(targetColumnIndex);
   }
 }

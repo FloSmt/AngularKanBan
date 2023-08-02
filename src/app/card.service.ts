@@ -13,7 +13,8 @@ export class CardService {
   private cards : Card[] = [];
 
     addCard(title:string, description:string) {
-      const newCard: Card = {id: this.getNextId(), title:title, description:description, priority:this.priorityService.getPriority(-1), status: this.statusService.getStatus(0)};
+      const date:Date = new Date(Date.now());
+      const newCard: Card = {id: this.getNextId(), title:title, description:description, priority:this.priorityService.getPriority(-1), status: this.statusService.getStatus(0), created: date, edited: null};
       this.cards.push(newCard);
     }
 
@@ -31,12 +32,27 @@ export class CardService {
 
   constructor(private priorityService:PriorityService, private statusService:StatusService) { }
 
+  public setStatus(card:Card, status:Status) {
+    if (!(this.cards.find(x=>x.id == card.id))) {
+      return;
+    }
 
+    this.cards.find(x=>x.id == card.id)!.edited = new Date(Date.now());
+    this.cards.find(x=>x.id == card.id)!.status = status;
+  }
+
+  //Card wird mit neuen Werten ersetzt
   public setCard(card:Card):void {
+      if (!(this.cards.find(x=>x.id == card.id))) {
+        return;
+      }
+
     this.cards.find(x=>x.id == card.id)!.status = card.status;
     this.cards.find(x=>x.id == card.id)!.priority = card.priority;
     this.cards.find(x=>x.id == card.id)!.description = card.description;
     this.cards.find(x=>x.id == card.id)!.title = card.title;
+    this.cards.find(x=>x.id == card.id)!.created = card.created;
+    this.cards.find(x=>x.id == card.id)!.edited = new Date(Date.now());
   }
 
   public deleteCard(id:number) {

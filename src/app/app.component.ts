@@ -11,7 +11,16 @@ import {StatusService} from "./status.service";
 export class AppComponent {
   title = 'AngularKanBan';
 
-  inCardEdit:Card = {id:-1,title:"unknown",description:"unknown", priority: this.priorityService.getPriority(-1), status: this.statusService.getStatus(0)};
+  //Platzhalter vorlage
+  inCardEdit:Card = {
+    id:-1,
+    title:"unknown",
+    description:"unknown",
+    priority: this.priorityService.getPriority(-1),
+    status: this.statusService.getStatus(0),
+    edited: new Date(),
+    created: new Date()
+  };
 
   constructor(public priorityService:PriorityService, public statusService:StatusService) {
   }
