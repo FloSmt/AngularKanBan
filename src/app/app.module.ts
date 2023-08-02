@@ -15,6 +15,7 @@ import { EditCardComponent } from './edit-card/edit-card.component';
 import { PriorityComponent } from './priority/priority.component';
 import { StatusColumnComponent } from './status-column/status-column.component';
 import { EditStatusComponent } from './edit-status/edit-status.component';
+import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
 
 
 @NgModule({
@@ -32,7 +33,10 @@ import { EditStatusComponent } from './edit-status/edit-status.component';
   imports: [
     BrowserModule,
     HeaderComponent,
-    FormsModule
+    FormsModule,
+    CdkDropListGroup,
+    CdkDropList,
+    CdkDrag
   ],
   providers: [CardService],
   bootstrap: [AppComponent]

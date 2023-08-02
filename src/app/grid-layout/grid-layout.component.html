@@ -1,8 +1,9 @@
 <!-- grid-layout.component.html -->
 <app-card-input (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
-<div class="container">
+<div class="container" cdkDropListGroup>
 
     <!-- Column 1 -->
+
   <app-status-column [status]="statusService.getStatus(0)"></app-status-column>
 
     <!-- Column 2 -->
@@ -13,4 +14,36 @@
 
     <!-- Column 4 -->
   <app-status-column [status]="statusService.getStatus(3)"></app-status-column>
+
+    <!--<div class="column c-todo list" [style.border-color]="statusService.getStatus(0).color" id="column-0" cdkDropList [cdkDropListData]="cardService.column1" (cdkDropListDropped)="drop($event)">
+        <span>{{statusService.getStatus(0).title}}</span><hr>
+        <div class="box" *ngFor="let card of cardService.column1" cdkDrag [cdkDragData]="card">
+            <app-card [card]="card"></app-card>
+        </div>
+    </div>
+
+
+    <div class="column c-prog list" [style.border-color]="statusService.getStatus(1).color" id="column-1" cdkDropList [cdkDropListData]="cardService.column2" (cdkDropListDropped)="drop($event)">
+        <span>{{statusService.getStatus(1).title}}</span><hr>
+        <div class="box" *ngFor="let card of cardService.column2" cdkDrag [cdkDragData]="card">
+            <app-card [card]="card"></app-card>
+        </div>
+    </div>
+
+
+    <div class="column c-test list" [style.border-color]="statusService.getStatus(2).color" id="column-2" cdkDropList [cdkDropListData]="cardService.column3" (cdkDropListDropped)="drop($event)">
+        <span>{{statusService.getStatus(2).title}}</span><hr>
+        <div class="box" *ngFor="let card of cardService.column3" cdkDrag [cdkDragData]="card">
+            <app-card [card]="card"></app-card>
+        </div>
+    </div>
+
+
+    <div class="column c-done list" [style.border-color]="statusService.getStatus(3).color" id="column-3" cdkDropList [cdkDropListData]="cardService.column4" (cdkDropListDropped)="drop($event)">
+        <span>{{statusService.getStatus(3).title}}</span><hr>
+        <div class="box" *ngFor="let card of cardService.column4" cdkDrag [cdkDragData]="card">
+            <app-card [card]="card"></app-card>
+        </div>
+    </div>-->
+
 </div>
