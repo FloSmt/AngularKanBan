@@ -74,6 +74,7 @@ export class CardService {
         cards1.push(card);
       }
     }
+    cards1.sort(function (a,b) {return (b.priority.id)-(a.priority.id)})
     return cards1;
   }
 

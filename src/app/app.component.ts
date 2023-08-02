@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {CardComponent} from "./card/card.component";
-import {CardService} from "./card.service";
 import {Card} from "./card";
 import {PriorityService} from "./priority.service";
 import {StatusService} from "./status.service";

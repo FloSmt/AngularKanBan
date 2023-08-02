@@ -17,6 +17,14 @@
   cursor: pointer;
 }
 
+.priorityhr {
+  outline: none;
+  background-color: #00000011;
+  height: 2px;
+  width: 100%;
+  border: none;
+}
+
 .column .title .edit {
   float: right;
 }

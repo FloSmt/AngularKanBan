@@ -11,8 +11,8 @@ export class PriorityService {
   priority:Priority[] = [
     {
       id: 0,
-      color: "#ff0000",
-      name: "HIGH"
+      color: "#22AA09",
+      name: "LOW"
     },
     {
       id: 1,
@@ -21,8 +21,8 @@ export class PriorityService {
     },
     {
       id: 2,
-      color: "#22AA09",
-      name: "LOW"
+      color: "#ff0000",
+      name: "HIGH"
     },
     {
       id: 3,
