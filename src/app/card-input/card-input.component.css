@@ -1,43 +1,38 @@
 .container {
-  text-align: center;
-  border: 5px solid #a8a8a8;
-  margin: 1em auto 3em auto;
-  width: 50%;
-  padding: 1em;
+  border: 0;
+  margin: 1em 1em 1em 1em;
+  width: auto;
+  padding: 0 1em 1em 1em;
   border-radius: 10px;
 }
 
-input, textarea {
+input {
   display: block;
   width: 100%;
   max-width: 100%;
   min-width: 100%;
-  border: 0;
+  border: 1px solid #adadad;
   border-radius: 10px;
-  font-size: 1.1em;
-  box-shadow: 5px 5px 5px #a8a8a8;
+  font-size: 1em;
+  box-shadow: 0 0 6px #a8a8a8;
   margin-top: 1em;
   margin-bottom: 1em;
-  padding: 1em 0 1em 0;
+
   text-align: center;
-}
-
-input,textarea:focus {
   outline: 0;
-  background-color: #f5f5f5;
 }
 
-textarea {
-  height: 100px;
-  min-height: 100px;
+input :hover {
+  background-color: #d76767;
+  outline-offset: inherit;
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #efefef;
   border: none;
   border-radius: 10px;
-  color: white;
-  padding: 15px 32px;
+  color: #000000;
+  padding: 8px;
   text-align: center;
   text-decoration: none;
   display: block;
@@ -46,6 +41,6 @@ button {
 }
 
 button:hover {
-  background-color: #347737;
+  background-color: #cbcbcb;
   cursor: pointer;
 }

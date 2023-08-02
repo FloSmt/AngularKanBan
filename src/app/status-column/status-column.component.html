@@ -4,6 +4,7 @@
     <div><span>{{status.title}}</span></div>
     <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="status.limit">{{cardService.getCardsWithStatus(status).length}}/{{status.max}}</div>
   </div>
+  <app-card-input [id]="'column-'+status.id" (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
   <hr>
   <div class="cards box" *ngFor="let card of cardService.getCardsWithStatus(status);let i = index" cdkDrag [cdkDragData]="card">
     <hr class="priorityhr" *ngIf=" i!=0 && (cardService.getCardsWithStatus(status)[i-1].priority != cardService.getCardsWithStatus(status)[i].priority)">
