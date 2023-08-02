@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Status} from "../status";
 import {Priority} from "../priority";
 import {StatusService} from "../status.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-edit-status',
@@ -12,8 +13,7 @@ export class EditStatusComponent {
 
   @Input() status!:Status;
 
-  constructor(private statusService:StatusService) {
-  }
+  constructor(private statusService:StatusService) {}
 
 
   closeEdit() {
@@ -54,8 +54,8 @@ export class EditStatusComponent {
   }
 
   public GetMax():number {
-    if (this.tmpLimitMax) {
-      return this.tmpLimitMax;
+    if (this.tmpLimitMax != null || typeof this.tmpLimitMax != 'undefined') {
+      return this.tmpLimitMax!;
     }else {
       return this.status.max;
     }
@@ -78,7 +78,14 @@ export class EditStatusComponent {
     this.editTitle = false;
   }
 
+  updateTmp() {
+    this.tmpLimit = (<HTMLInputElement>document.getElementById( this.GetID() + "_limit")).checked;
+    this.tmpColor = (<HTMLInputElement>document.getElementById(this.GetID() + "_color")).value;
+    this.tmpLimitMax = Number((<HTMLInputElement>document.getElementById(this.GetID() + "_max")).value);
+  }
+
   save() {
+    this.updateTmp();
     this.statusService.setStatus({id:this.GetID(),title:this.GetTitle(),color:this.GetColor(),limit:this.GetLimit(),max:this.GetMax()})
     this.closeEdit();
   }

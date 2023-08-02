@@ -13,7 +13,22 @@
       </form>
     </div>
     <div class="main">
-
+      <form>
+        <div>
+          <label>Color:</label>
+          <input type="color" name="color" id="{{GetID()}}_color" value="{{GetColor()}}">
+        </div>
+        <hr>
+        <div>
+          <label>Card Limit:</label>
+          <input type="checkbox" name="limit" id="{{GetID()}}_limit" [checked]="GetLimit()">
+        </div>
+        <hr>
+        <div>
+          <label>Max Cards:</label>
+          <input type="number" name="max" id="{{GetID()}}_max" class="max" value="{{GetMax()}}" min="0">
+        </div>
+      </form>
     </div>
     <div class="footer">
       <button class="save button" (click)="save()">Save</button>
