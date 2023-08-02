@@ -12,8 +12,8 @@ export class StatusService {
       id: 0,
       color: "#c143ff",
       title: "ToDo",
-      limit: true,
-      max: 1
+      limit: false,
+      max: 0
     },
     {
       id: 1,

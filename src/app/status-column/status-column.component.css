@@ -18,10 +18,24 @@
 }
 
 .priorityhr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.priorityhr p {
+  margin: 0 10px;
+  font-weight: bold;
+  font-size: 0.6rem;
+}
+
+.priorityhr hr{
   outline: none;
   background-color: #00000011;
   height: 2px;
   width: 100%;
+  margin: 0;
   border: none;
 }
 
@@ -31,6 +45,8 @@
 
 .column .cards {
   padding: 0 10px 0 10px;
+
+  transition: all 1s ease-in-out;
 }
 
 .column hr {

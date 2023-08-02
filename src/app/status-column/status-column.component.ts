@@ -19,8 +19,12 @@ export class StatusColumnComponent {
   }
 
   getColor(status:Status):string {
-    if (this.cardService.getCardsWithStatus(status).length > status.max) {
-      return "#f83000";
+    if (status.limit) {
+      if (this.cardService.getCardsWithStatus(status).length > status.max) {
+        return "#f83000";
+      }else {
+        return "#9f9f9f";
+      }
     }else {
       return "#9f9f9f";
     }
@@ -43,8 +47,7 @@ export class StatusColumnComponent {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       const cardToMove = event.previousContainer.data[event.previousIndex];
-      const targetColumnIndex = +event.container.id.split('-')[1];
-      console.log(targetColumnIndex);
+      const targetColumnIndex = +event.container.id.split('-')[1];;
       this.setCardStatusBasedOnColumn(cardToMove,targetColumnIndex);
       transferArrayItem(
         event.previousContainer.data,
