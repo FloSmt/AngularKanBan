@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {StatusService} from "../status.service";
 
 @Component({
   selector: 'app-card-input',
