@@ -8,6 +8,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 export class CardInputComponent {
   @Input() id!: string;
+  @Input() color! : string;
   @Output() addCardToColumn = new EventEmitter<{id:string; title: string; content: string }>();
   title: string = '';
   content: string = '';
@@ -15,4 +16,6 @@ export class CardInputComponent {
   addNewCard() {
     this.addCardToColumn.emit({id: this.id, title: this.title, content: this.content});
   }
+
+  protected readonly status = status;
 }
