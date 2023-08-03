@@ -6,5 +6,7 @@ export interface Card {
   title: string,
   priority: Priority,
   status: Status,
-  description: string;
+  description: string,
+  created: Date,
+  edited: Date | null;
 }
