@@ -1,6 +1,5 @@
 .container {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0,25%)); /* 4 = Anzahl der Spalten*/
   gap: 0.3em;
   margin: 1rem;
   max-width: 100%;

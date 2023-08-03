@@ -1,17 +1,7 @@
-<!-- grid-layout.component.html -->
-<!--<app-card-input (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>-->
-<div class="container" cdkDropListGroup>
+<div class="container" cdkDropListGroup [style.grid-template-columns]="'repeat(' + statusService.getStatusList().length + ', minmax(10%,100%)'">
 
     <!-- Column 1 -->
-  <app-status-column [status]="statusService.getStatus(0)"></app-status-column>
-
-    <!-- Column 2 -->
-  <app-status-column [status]="statusService.getStatus(1)"></app-status-column>
-
-    <!-- Column 3 -->
-  <app-status-column [status]="statusService.getStatus(2)"></app-status-column>
-
-    <!-- Column 4 -->
-  <app-status-column [status]="statusService.getStatus(3)"></app-status-column>
-
+  <div *ngFor="let status of statusService.getStatusList()">
+    <app-status-column [status]="status"></app-status-column>
+  </div>
 </div>

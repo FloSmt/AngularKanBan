@@ -1,19 +1,20 @@
 .container {
   border: 0;
-  width: 100%;
+  position: relative;
   display: flex;
   height: 4rem;
   background-color: #f0f0f0;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 4px 5%;
 }
 
 input {
   border: 1px solid #adadad;
   border-radius: 5px;
   font-size: 1em;
+  width: 70%;
   box-shadow: 0 0 6px #a8a8a8;
-  margin: 1em 3em 1em 1em;
   padding: 0.4em;
   text-align: center;
   outline: 0;
