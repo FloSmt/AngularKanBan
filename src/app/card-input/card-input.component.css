@@ -34,9 +34,11 @@ input :hover {
   height: 2.5rem;
   background-color: #87ee78;
   color: #5b5b5b;
+  transition: all 0.3s ease-in-out;
 }
 
 button:hover {
   cursor: pointer;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 15px rgb(128, 128, 128);
 }
