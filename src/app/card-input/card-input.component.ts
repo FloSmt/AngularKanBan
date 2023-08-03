@@ -14,7 +14,14 @@ export class CardInputComponent {
   content: string = '';
 
   addNewCard() {
-    this.addCardToColumn.emit({id: this.id, title: this.title, content: this.content});
+    const minLength:number = 5;
+
+    if(this.title.length >= minLength) {
+      this.addCardToColumn.emit({id: this.id, title: this.title, content: this.content});
+    }else {
+      alert("Sie müssen mindestens 5 Zeichen eingeben!")
+    }
+
   }
 
   protected readonly status = status;
