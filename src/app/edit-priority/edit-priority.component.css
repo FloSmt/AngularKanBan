@@ -31,7 +31,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  height: 20rem;
+  height: 25rem;
   max-height: 35rem;
   padding: 1rem;
   border: 2px solid #00000011;
@@ -40,7 +40,32 @@
   background-color: rgba(242, 242, 242, 0.57);
   overflow-y: scroll;
 }
+.main p {
+  font-size: 0.75rem;
+  text-align: left;
+  font-weight: bold;
+  padding: 5px;
+  background-color: white;
+  border: 2px solid #00000011;
+}
 
+.main .high {
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 10px;
+  float: left;
+}
+
+.main p span {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: gray;
+  float: right;
+}
+
+.main .low {
+  border-radius: 0 0 5px 5px;
+  margin-top: 10px;
+}
 .main .add {
   padding: 5px;
   display: flex;
@@ -50,14 +75,14 @@
   text-align: center;
   cursor: pointer;
   height: 2rem;
-  background-color: white;
+  background-color: #99ceff;
   border-radius: 5px;
   border: 2px solid #00000011;
   transition: all 0.25s ease-in-out;
 }
 
 .main .add:hover {
-  background-color: #00000011;
+  background-color: #b5deff;
 }
 
 .main .add h3 {
@@ -70,7 +95,7 @@
   width: 100%;
 }
 
-.main .priorityDiv {
+.main .priorityDiv:not(:last-child) {
   margin-bottom: 10px;
 }
 
