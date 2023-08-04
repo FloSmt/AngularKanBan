@@ -11,24 +11,24 @@ export class PriorityService {
   priority:Priority[] = [
     {
       id: 0,
-      color: "#22AA09",
-      name: "LOW"
+      color: "#7100B8",
+      name: "IMPORTANT"
     },
     {
       id: 1,
-      color: "#ffbf00",
-      name: "MEDIUM"
-    },
-    {
-      id: 2,
       color: "#ff0000",
       name: "HIGH"
     },
     {
+      id: 2,
+      color: "#ffbf00",
+      name: "MEDIUM"
+    },
+    {
       id: 3,
-      color: "#7100B8",
-      name: "IMPORTANT"
-    }
+      color: "#22AA09",
+      name: "LOW"
+    },
   ];
   constructor() { }
 
@@ -38,5 +38,9 @@ export class PriorityService {
 
   public getPriorities():Priority[] {
     return this.priority;
+  }
+
+  public setPriorities(priorities:Priority[]) {
+    this.priority = priorities;
   }
 }

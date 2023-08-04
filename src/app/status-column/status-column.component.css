@@ -17,6 +17,10 @@
   cursor: pointer;
 }
 
+.title span {
+  font-size: 1.25rem;
+}
+
 .priorityhr {
   display: flex;
   justify-content: center;

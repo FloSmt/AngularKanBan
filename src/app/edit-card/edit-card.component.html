@@ -39,6 +39,7 @@
               <app-priority [priority]="GetPriority()"></app-priority>
             </div>
             <div class="options">
+              <div class="edit" (click)="openEditPriorityWindow()">Edit</div>
               <div class="option" *ngFor="let p of priorityService.getPriorities()">
                 <app-priority [priority]="p" (click)="selectPriority(p)"></app-priority>
               </div>

@@ -16,6 +16,8 @@ import { PriorityComponent } from './priority/priority.component';
 import { StatusColumnComponent } from './status-column/status-column.component';
 import { EditStatusComponent } from './edit-status/edit-status.component';
 import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
+import { EditPriorityComponent } from './edit-priority/edit-priority.component';
+import { EditPriorityDivComponent } from './edit-priority-div/edit-priority-div.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
     EditCardComponent,
     PriorityComponent,
     StatusColumnComponent,
-    EditStatusComponent
+    EditStatusComponent,
+    EditPriorityComponent,
+    EditPriorityDivComponent
   ],
   imports: [
     BrowserModule,
