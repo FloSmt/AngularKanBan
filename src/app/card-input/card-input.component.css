@@ -2,21 +2,17 @@
   border: 0;
   position: relative;
   display: flex;
-  height: 4rem;
-  background-color: #f0f0f0;
   align-items: center;
-  justify-content: space-between;
-  padding: 4px 5%;
+  justify-content: center;
+  padding: 15px 5px 15px 5px;
 }
 
 input {
-  border: 1px solid #adadad;
-  border-radius: 5px;
+  border: none;
+  border-radius: 5px 0 0 5px;
   font-size: 1em;
   width: 70%;
-  box-shadow: 0 0 6px #a8a8a8;
   padding: 0.4em;
-  text-align: center;
   outline: 0;
 }
 
@@ -29,17 +25,17 @@ input :hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0 5px 5px 0;
   border: 0;
-  border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
+  padding: 1rem;
+  width: 1.2rem;
+  height: 1rem;
   background-color: #87ee78;
-  color: #5b5b5b;
+  color: rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in-out;
 }
 
 button:hover {
   cursor: pointer;
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 0 0 15px rgb(128, 128, 128);
+  color: rgba(255, 255, 255, 0.7);
 }
