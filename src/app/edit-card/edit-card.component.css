@@ -187,7 +187,23 @@
 .options {
   border-top: 2px solid #00000011;
   max-height: 10rem;
-  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.options .edit {
+  margin: 5px 5px 5px;
+  padding: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  border: 2px solid #00000011;
+  font-size: 0.75rem;
+  font-weight: bolder;
+  transition: all 0.25s ease-in-out;
+}
+
+.options .edit:hover {
+  background-color: #00000011;
 }
 
 .option {
