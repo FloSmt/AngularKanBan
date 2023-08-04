@@ -8,6 +8,8 @@
   height: 85vh;
   overflow: hidden;
   border-top: 6px solid;
+  transition: all 0.3s ease-in-out;
+
 }
 
 .column .title {
