@@ -1,0 +1,9 @@
+<div class="priorityContainer" id="{{priority.id}}_priority" [style.background-color]="priority.color + '4b'" [style.border-color]="priority.color">
+  <form>
+    <input class="name input" type="text" name="name" id="{{priority.id}}_priority_name" value="{{priority.name}}" [style.color]="priority.color">
+    <input class="color input" type="color" name="color" id="{{priority.id}}_priority_color" value="{{priority.color}}">
+    <div class="buttons">
+      <button class="delete button" (click)="delete()"><span class="material-symbols-outlined">delete</span></button>
+    </div>
+  </form>
+</div>

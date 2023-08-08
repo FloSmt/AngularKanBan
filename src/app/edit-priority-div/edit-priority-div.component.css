@@ -1,0 +1,72 @@
+.priorityContainer {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #00000011;
+  cursor: pointer;
+}
+
+.priorityContainer form{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priorityContainer .name {
+  padding: 5px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-weight: bolder;
+}
+
+.priorityContainer .name:focus {
+  outline: none;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background-color: transparent;
+  border: unset;
+  font-weight: 800;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  max-height: 2rem;
+  padding: 10px 20px 10px 20px;
+  transition: all 0.25s ease-in-out;
+}
+
+.button:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+
+.button span {
+  font-size: 1rem;
+  padding-right: 5px;
+}
+
+.delete {
+  color: red;
+  margin-right: 10px;
+}
+
+.delete:hover {
+  background-color: #ff00002d;
+}
+
+.save {
+  color: dodgerblue;
+}
+
+.save:hover {
+  background-color: #1e90ff2d;
+}

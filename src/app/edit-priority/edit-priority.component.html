@@ -1,0 +1,24 @@
+<div class="window" id="editpriority">
+  <div class="container">
+    <div class="close" (click)="closeWindow()">x</div>
+    <div class="firstbox">
+      <h1>Prioritäten-Liste Editieren</h1>
+    </div>
+    <div class="main">
+      <p class="high">most important <span>(Drag & Drop to sort)</span></p>
+        <div class="priorityList" cdkDropList (cdkDropListDropped)="drop($event)">
+          <div class="priorityDiv" *ngFor="let priority of priorities; let i = index;" cdkDrag [style.background-color]="'#ffffff'">
+            {{setPrioritiesAmount(i+1)}}
+            <app-edit-priority-div [priority]="priority" [index]="i" (deleteFct)="delete(priority)"></app-edit-priority-div>
+          </div>
+        </div>
+      <p class="low">least important <span>(Drag & Drop to sort)</span></p>
+        <div class="add" (click)="add()">
+          <h3>Add Priority</h3>
+        </div>
+    </div>
+    <div class="footer">
+      <button class="save button" (click)="save()">Save</button>
+    </div>
+  </div>
+</div>

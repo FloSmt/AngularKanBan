@@ -4,6 +4,7 @@ import {Card} from "./card";
 import {PriorityService} from "./priority.service";
 import {StatusService} from "./status.service";
 import {Status} from "./status";
+import {Priority} from "./priority";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class CardService {
       return this.cards;
     }
 
-  constructor(private priorityService:PriorityService, private statusService:StatusService) { }
+  constructor(public priorityService:PriorityService, private statusService:StatusService) { }
 
   public setStatus(card:Card, status:Status) {
     if (!(this.cards.find(x=>x.id == card.id))) {
@@ -76,7 +77,18 @@ export class CardService {
         cards1.push(card);
       }
     }
-    cards1.sort(function (a,b) {return (b.priority.id)-(a.priority.id)})
+    let p:Priority[] = this.priorityService.getPriorities();
+    let service:PriorityService = this.priorityService;
+    cards1.sort(function (a,b) {
+      if (b.priority === service.getPriority(-1)) {
+        return -9999;
+      }
+      if (a.priority === service.getPriority(-1)) {
+        return 9999;
+      }
+
+      return (p.indexOf(a.priority))-(p.indexOf(b.priority))
+    })
     return cards1;
   }
 

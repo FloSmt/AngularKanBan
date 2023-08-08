@@ -23,7 +23,6 @@ export class EditCardComponent{
     this.tmpTitel = null;
     this.tmpPriority = null;
     this.tmpStatus = null;
-
   }
 
   protected readonly of = of;
@@ -51,6 +50,14 @@ export class EditCardComponent{
   //öffnet das Editor menu für die aktuelle Card
   openWindow() {
     const modalElement = document.getElementById('modalElement');
+    if (modalElement) {
+      modalElement.style.display = 'flex';
+    }
+  }
+
+  openEditPriorityWindow() {
+    this.closeSelection();
+    const modalElement = document.getElementById('editpriority');
     if (modalElement) {
       modalElement.style.display = 'flex';
     }
@@ -143,9 +150,6 @@ export class EditCardComponent{
       token = 'ago',
       list_choice = 1;
 
-    if (seconds == 0) {
-      return 'Just now'
-    }
     if (seconds < 0) {
       seconds = Math.abs(seconds);
       token = 'from now';
