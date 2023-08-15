@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Card} from "./card";
 import {PriorityService} from "./priority.service";
 import {StatusService} from "./status.service";
+import {CardService} from "./card.service";
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,7 @@ export class AppComponent {
     created: new Date()
   };
 
-  constructor(public priorityService:PriorityService, public statusService:StatusService) {
+  constructor(public priorityService:PriorityService, public statusService:StatusService, private cardService: CardService) {
+    this.cardService.loadCardsFromDatabase();
   }
-
 }
