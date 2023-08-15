@@ -86,7 +86,7 @@ export class EditCardComponent{
     if (this.tmpStatus) {
       return this.tmpStatus;
     }else {
-      return  this.appComponent.inCardEdit.status;
+      return this.appComponent.inCardEdit.status as Status;
     }
   }
 
@@ -235,7 +235,7 @@ export class EditCardComponent{
   save() {
     this.closeSelection();
     var saveCard:Card = {title:this.GetTitle(), priority:this.GetPriority(),description:this.GetDescription(),id:this.GetId(), status: this.GetStatus(), created: this.GetCreateDate(), edited: this.GetEditedDate()};
-    this.cardService.setCard(saveCard)
+    this.cardService.setCard(saveCard);
     this.closeWindow();
   }
 
