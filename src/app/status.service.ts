@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Status} from "./status";
-import {Card} from "./card";
+
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,7 @@ export class StatusService {
       max: 0
     }
   ];
+
   constructor() { }
 
   public getStatus(id:number):Status {
