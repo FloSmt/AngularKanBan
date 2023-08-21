@@ -33,7 +33,10 @@ export class PriorityService {
   constructor() { }
 
   public getPriority(id:number):Priority {
-    return (typeof this.priority.find(x => x.id === id) != "undefined") ? this.priority.find(x => x.id === id)! : this.default;
+    //return (typeof this.priority.find(x => x.id === id) != "undefined") ? this.priority.find(x => x.id === id)! : this.default;
+    //return this.priority.find(p => p.id === id) || this.default;
+    const foundPriority = this.priority.find(p => p.id === id);
+    return foundPriority ? foundPriority : this.default;
   }
 
   public getPriorities():Priority[] {

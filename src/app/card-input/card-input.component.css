@@ -21,7 +21,7 @@ input :hover {
   outline-offset: inherit;
 }
 
-.button {
+button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,4 +38,9 @@ input :hover {
 button:hover {
   cursor: pointer;
   color: rgba(255, 255, 255, 0.7);
+}
+
+button:active {
+  box-shadow: none;
+  transition: all 0.1s ease-in-out;
 }

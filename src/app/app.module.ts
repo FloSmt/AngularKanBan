@@ -18,6 +18,7 @@ import { EditStatusComponent } from './edit-status/edit-status.component';
 import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
 import { EditPriorityComponent } from './edit-priority/edit-priority.component';
 import { EditPriorityDivComponent } from './edit-priority-div/edit-priority-div.component';
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { EditPriorityDivComponent } from './edit-priority-div/edit-priority-div.
     FormsModule,
     CdkDropListGroup,
     CdkDropList,
-    CdkDrag
+    CdkDrag,
+    HttpClientModule,
   ],
   providers: [CardService],
   bootstrap: [AppComponent]

@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {DataService} from "../db.service";
+import {StatusService} from "../status.service";
 
 @Component({
   selector: 'app-card-input',
@@ -14,15 +16,11 @@ export class CardInputComponent {
   content: string = '';
 
   addNewCard() {
-    const minLength:number = 5;
-
+    const minLength:number = 3;
     if(this.title.length >= minLength) {
       this.addCardToColumn.emit({id: this.id, title: this.title, content: this.content});
     }else {
-      alert("Sie müssen mindestens 5 Zeichen eingeben!")
+      alert("Sie müssen mindestens 3 Zeichen eingeben!")
     }
-
   }
-
-  protected readonly status = status;
 }

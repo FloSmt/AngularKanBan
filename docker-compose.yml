@@ -1,0 +1,62 @@
+version: '3'
+services:
+  php:
+    build:
+      context: .
+      dockerfile: php-app/Dockerfile
+    networks:
+      - mynetwork
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php-app:/var/www/html
+    environment:
+      DB_HOST: db4free.net
+      DB_PORT: 3306
+      DB_NAME: kanban
+      DB_USER: kanban
+      DB_PASSWORD: yzf@gbq_PBQ0kcy6apk
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kanban
+      MYSQL_USER: kanban
+      MYSQL_PASSWORD: test
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin-container
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "6060:80"
+    depends_on:
+      - mysql
+    networks:
+      - mynetwork
+
+  api-container:
+    build:
+      context: .
+      dockerfile: php-app/Dockerfile
+    networks:
+      - mynetwork
+    ports:
+      - "8081:80"
+
+volumes:
+  mysql-data:
+
+networks:
+  mynetwork:
+    driver: bridge

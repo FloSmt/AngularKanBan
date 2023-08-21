@@ -1,8 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Status} from "../status";
-import {Priority} from "../priority";
 import {StatusService} from "../status.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {DataService} from "../db.service";
 
 @Component({
   selector: 'app-edit-status',
@@ -13,7 +12,7 @@ export class EditStatusComponent {
 
   @Input() status!:Status;
 
-  constructor(private statusService:StatusService) {}
+  constructor(private statusService:StatusService, private dataService : DataService) {}
 
 
   closeEdit() {
@@ -88,5 +87,19 @@ export class EditStatusComponent {
     this.updateTmp();
     this.statusService.setStatus({id:this.GetID(),title:this.GetTitle(),color:this.GetColor(),limit:this.GetLimit(),max:this.GetMax()})
     this.closeEdit();
+
+    //daten in db speichern
+    this.updateStatusInDb(this.GetID()+1,this.GetTitle(),this.GetColor(), this.GetLimit(), this.GetMax());
+
+  }
+
+  private updateStatusInDb(statusId: number, title: string, color:string, limits:boolean, max:number) {
+    this.dataService.updateStatusInDb(statusId, title, color, limits, max).subscribe(
+        response => {
+          console.log('Status successfully updated in database');
+        }, error => {
+          console.error('Error updating card: ', error);
+        }
+    )
   }
 }

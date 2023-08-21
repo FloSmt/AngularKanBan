@@ -4,6 +4,7 @@ import {StatusService} from "../status.service";
 import {Status} from "../status";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {Card} from "../card";
+import {DataService} from "../db.service";
 
 
 @Component({
@@ -12,10 +13,13 @@ import {Card} from "../card";
   styleUrls: ['./status-column.component.css']
 })
 export class StatusColumnComponent {
+  cards: Card[] = [];
+  @Input() status! : Status;
 
-  @Input() status!:Status;
-
-  constructor(public cardService:CardService, public statusService:StatusService) {
+  constructor(public cardService:CardService, public statusService:StatusService, private dbService: DataService) {
+    cardService.getCards$().subscribe(cards => {
+      this.cards = this.cardService.getCardsWithStatus(this.status);
+    })
   }
 
   getColor(status:Status):string {
@@ -41,7 +45,6 @@ export class StatusColumnComponent {
     this.cardService.setStatus(card, this.statusService.getStatus(columnIndex));
   }
 
-
   drop(event: CdkDragDrop<Card[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -49,6 +52,9 @@ export class StatusColumnComponent {
       const cardToMove = event.previousContainer.data[event.previousIndex];
       const targetColumnIndex = +event.container.id.split('-')[1];
       this.setCardStatusBasedOnColumn(cardToMove,targetColumnIndex);
+
+      this.updateStatusInDb(cardToMove.id, targetColumnIndex);
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -62,5 +68,33 @@ export class StatusColumnComponent {
     const targetColumnIndex: number = parseInt(event.id.split('-')[1]);
     this.cardService.addCard(event.title,event.content);
     this.setCardStatusBasedOnColumn(this.cardService.getCards()[this.cardService.getCards().length-1],targetColumnIndex);
+
+    const newCard = this.cardService.getCards()[this.cardService.getCards().length - 1];
+    this.cards.push(newCard);
+
+    //neue card wird in db eingefügt
+    this.insertDataInDb(targetColumnIndex,event.title, -1);
+  }
+
+  private updateStatusInDb(cardId:number, newStatusId:number) {
+    this.dbService.updateCardInDb(cardId, null, newStatusId, null, null, null).subscribe(
+        response => {
+          console.log('Status ID successfully updated in database');
+        }, error => {
+          console.error('Error updating statuts ID: ', error);
+        }
+    )
+  }
+
+  insertDataInDb(newStatusId: number, title: string, priorityId: number): void {
+    this.dbService.insertNewCard(newStatusId, title, priorityId)
+      .subscribe(
+        response => {
+          console.log('Daten erfolgreich eingefügt', response);
+        },
+        error => {
+          console.error('Fehler beim Einfügen der Daten', error);
+        }
+      );
   }
 }

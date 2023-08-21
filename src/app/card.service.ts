@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
-
 import {Card} from "./card";
 import {PriorityService} from "./priority.service";
 import {StatusService} from "./status.service";
 import {Status} from "./status";
 import {Priority} from "./priority";
+import {DataService} from "./db.service";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
-
+  private cards$$ = new BehaviorSubject<Card[]>([]);
   private cards : Card[] = [];
 
     addCard(title:string, description:string) {
       const date:Date = new Date(Date.now());
-      const newCard: Card = {id: this.getNextId(), title:title, description:description, priority:this.priorityService.getPriority(-1), status: this.statusService.getStatus(0), created: date, edited: null};
-      this.cards.push(newCard);
+      // @ts-ignore
+      const newCard: Card = {id: this.getNextId(), title:title, description:description, priority:this.priorityService.getPriority(-1), status: null, created: date, edited: null};
+      this.pushCard(newCard);
     }
 
     private getNextId() :number {
@@ -31,13 +33,18 @@ export class CardService {
       return this.cards;
     }
 
-  constructor(public priorityService:PriorityService, private statusService:StatusService) { }
+    getCards$(): Observable<Card[]> {
+      return this.cards$$.asObservable();
+    }
+
+  constructor(public priorityService:PriorityService, private statusService:StatusService, private dataService : DataService) {
+
+  }
 
   public setStatus(card:Card, status:Status) {
     if (!(this.cards.find(x=>x.id == card.id))) {
       return;
     }
-
     this.cards.find(x=>x.id == card.id)!.edited = new Date(Date.now());
     this.cards.find(x=>x.id == card.id)!.status = status;
   }
@@ -66,17 +73,18 @@ export class CardService {
     var index: number = this.cards.indexOf(card);
 
     this.cards.splice(index, 1);
+    this.cards$$.next(this.cards);
   }
 
-  public getCardsWithStatus(status:Status):Card[] {
+  public getCardsWithStatus(status: Status):Card[] {
     let cards1:Card[] = [];
-
     // @ts-ignore
-    for (const card:Card of this.cards) {
+      for (const card:Card of this.cards) {
       if (card.status === status) {
         cards1.push(card);
       }
     }
+
     let p:Priority[] = this.priorityService.getPriorities();
     let service:PriorityService = this.priorityService;
     cards1.sort(function (a,b) {
@@ -92,5 +100,19 @@ export class CardService {
     return cards1;
   }
 
-}
+    public loadCardsFromDatabase(): boolean {
+        this.dataService.getCardsFromDb().subscribe((data) => {
+          for (let i = 0; i < data.length; i++) {
+            const newCard: Card = {id: data[i].id, title: data[i].title, description: data[i].description, priority: this.priorityService.getPriority(data[i].priority), status: this.statusService.getStatus(data[i].status), created: data[i].created, edited: data[i].edited};
+            this.pushCard(newCard);
+          }
+          return true;
+        });
+        return false;
+    }
 
+    public pushCard(card: Card): void {
+      this.cards.push(card);
+      this.cards$$.next(this.cards);
+    }
+}

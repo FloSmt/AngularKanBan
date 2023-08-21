@@ -1,50 +1,69 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Status} from "./status";
-import {Card} from "./card";
+import {DataService} from "./db.service";
+import {BehaviorSubject, Observable} from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatusService {
 
+  private status$$ = new BehaviorSubject<Status[]>([]);
   status:Status[] = [
     {
       id: 0,
-      color: "#c143ff",
-      title: "ToDo",
+      color: "#ffffff",
+      title: "",
       limit: false,
       max: 0
     },
     {
       id: 1,
-      color: "#1fc2ff",
-      title: "In Progress",
+      color: "#ffffff",
+      title: "",
       limit: true,
-      max: 4
+      max: 0
     },
     {
       id: 2,
-      color: "#ffc634",
-      title: "Test",
+      color: "#ffffff",
+      title: "",
       limit: true,
-      max: 3
+      max: 0
     },
     {
       id: 3,
-      color: "#1ab802",
-      title: "Done",
+      color: "#ffffff",
+      title: "",
       limit: false,
       max: 0
     }
   ];
-  constructor() { }
+
+  constructor(private dbService: DataService) { }
 
   public getStatus(id:number):Status {
     return (typeof this.status.find(x => x.id === id) != "undefined") ? this.status.find(x => x.id === id)! : this.getStatus(0);
   }
 
-  public getStatusList():Status[] {
+  getStatus$(): Observable<Status[]> {
+    return this.status$$.asObservable();
+  }
+
+  public getStatusList(): Status[] {
     return this.status;
+  }
+
+  loadStatusFromDb() {
+    this.dbService.getStatusFromDb().subscribe((data) => {
+      for (let i = 0; i < data.length; i++) {
+        const newStatus: Status = {id: data[i].id-1, title: data[i].title, color: data[i].color, limit: data[i].limits, max: data[i].max};
+        this.setStatus(newStatus);
+      }
+        return true;
+    });
+      return false;
   }
 
   public setStatus(status:Status):void {

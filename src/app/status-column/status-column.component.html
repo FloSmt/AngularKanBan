@@ -9,11 +9,11 @@
     <hr [style.background-color]="status.color">
     <app-card-input [id]="'column-'+status.id" [color]="status.color" (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
   </div>
-  <div class="cards list" id="column-{{status.id}}" [style.border-color]="status.color + '3a'" cdkDropList [cdkDropListData]="cardService.getCardsWithStatus(status)" (cdkDropListDropped)="drop($event)">
-    <div class="card" *ngFor="let card of cardService.getCardsWithStatus(status);let i = index">
-      <div class="priorityhr"  *ngIf=" i==0 || (cardService.getCardsWithStatus(status)[i-1].priority != cardService.getCardsWithStatus(status)[i].priority)">
+  <div class="cards list" id="column-{{status.id}}" [style.border-color]="status.color + '3a'" cdkDropList [cdkDropListData]="cards" (cdkDropListDropped)="drop($event)">
+    <div class="card" *ngFor="let card of cards; let i = index">
+      <div class="priorityhr"  *ngIf=" i==0 || (cards[i-1].priority != cards[i].priority)">
         <hr>
-        <p [style.color]="cardService.getCardsWithStatus(status)[i].priority.color">{{cardService.getCardsWithStatus(status)[i].priority.name}}</p>
+        <p [style.color]="cards[i].priority.color">{{cards[i].priority.name}}</p>
         <hr>
       </div>
       <div class="box"  cdkDrag [cdkDragData]="card">
