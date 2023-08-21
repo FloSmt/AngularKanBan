@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import {Card} from "./card";
 import {PriorityService} from "./priority.service";
 import {StatusService} from "./status.service";
@@ -18,7 +17,7 @@ export class CardService {
     addCard(title:string, description:string) {
       const date:Date = new Date(Date.now());
       // @ts-ignore
-      const newCard: Card = {id: this.getNextId(), title:title, description:description, priority:this.priorityService.getPriority(-1), status: this.statusService.getStatus(0), created: date, edited: null};
+      const newCard: Card = {id: this.getNextId(), title:title, description:description, priority:this.priorityService.getPriority(-1), status: null, created: date, edited: null};
       this.pushCard(newCard);
     }
 
@@ -102,10 +101,9 @@ export class CardService {
   }
 
     public loadCardsFromDatabase(): boolean {
-        this.dataService.getData().subscribe((data) => {
+        this.dataService.getCardsFromDb().subscribe((data) => {
           for (let i = 0; i < data.length; i++) {
-            // @ts-ignore
-            const newCard: Card = {id: data[i].id, title: data[i].title, description: data[i].description, priority: this.priorityService.getPriorities()[data[i].priority], status: this.statusService.getStatusList()[data[i].status], created: data[i].created, edited: data[i].edited};
+            const newCard: Card = {id: data[i].id, title: data[i].title, description: data[i].description, priority: this.priorityService.getPriority(data[i].priority), status: this.statusService.getStatus(data[i].status), created: data[i].created, edited: data[i].edited};
             this.pushCard(newCard);
           }
           return true;

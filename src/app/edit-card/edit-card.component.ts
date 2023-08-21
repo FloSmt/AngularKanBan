@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Card} from "../card";
 import {CardService} from "../card.service";
 import {PriorityService} from "../priority.service";
@@ -7,16 +7,18 @@ import {Priority} from "../priority";
 import {AppComponent} from "../app.component";
 import {Status} from "../status";
 import {StatusService} from "../status.service";
+import {DataService} from "../db.service";
 
 @Component({
   selector: 'app-edit-card',
   templateUrl: './edit-card.component.html',
   styleUrls: ['./edit-card.component.css']
 })
-export class EditCardComponent{
+export class EditCardComponent {
   @ViewChild('modalElement') modalelement!:ElementRef;
 
   card!:Card;
+
   closeWindow() {
     this.modalelement.nativeElement.style.display = "none";
     this.tmpDescription = null;
@@ -30,7 +32,8 @@ export class EditCardComponent{
   constructor(public priorityService:PriorityService,
               public statusService:StatusService,
               private appComponent:AppComponent,
-              private cardService:CardService) {
+              private cardService:CardService,
+              private dataService: DataService) {
 
     this.card = appComponent.inCardEdit;
   }
@@ -95,7 +98,7 @@ export class EditCardComponent{
     let desc: string = "";
     if (this.tmpDescription != null && this.tmpDescription.length > 0) {
       desc = this.tmpDescription!;
-    }else if(this.appComponent.inCardEdit.description.length > 0) {
+    }else if(this.appComponent.inCardEdit.description && this.appComponent.inCardEdit.description.length > 0) {
       desc = this.appComponent.inCardEdit.description;
     }
 
@@ -124,7 +127,7 @@ export class EditCardComponent{
         time = +new Date(time);
         break;
       case 'object':
-        if (time.constructor === Date) time = time.getTime();
+        if (time instanceof Date) time = time.getTime();
         break;
       default:
         time = +new Date();
@@ -234,9 +237,12 @@ export class EditCardComponent{
   //übernimmt alle temporären änderungen in die card
   save() {
     this.closeSelection();
-    var saveCard:Card = {title:this.GetTitle(), priority:this.GetPriority(),description:this.GetDescription(),id:this.GetId(), status: this.GetStatus(), created: this.GetCreateDate(), edited: this.GetEditedDate()};
+    const saveCard: Card = {title: this.GetTitle(), priority: this.GetPriority(), description: this.GetDescription(), id: this.GetId(), status: this.GetStatus(), created: this.GetCreateDate(), edited: this.card.edited};
     this.cardService.setCard(saveCard);
     this.closeWindow();
+
+    //änderung in db speichern
+    this.updateCardInDb(this.GetId(),this.GetTitle(),this.GetStatus().id, this.GetPriority().id, this.GetDescription(), this.GetEditedDate());
   }
 
   //löscht die Card
@@ -245,4 +251,13 @@ export class EditCardComponent{
     this.closeWindow();
   }
 
+  private updateCardInDb(cardId: number, title: string, newStatusId: number, priorityId: number, description: string, edited: Date | null) {
+    this.dataService.updateCardInDb(cardId, title, newStatusId, priorityId, description, edited).subscribe(
+      response => {
+        console.log('Card successfully updated in database');
+      }, error => {
+        console.error('Error updating card: ', error);
+      }
+    )
+  }
 }

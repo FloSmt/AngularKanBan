@@ -9,16 +9,11 @@ import {StatusService} from "../status.service";
   styleUrls: ['./grid-layout.component.css']
 })
 
-export class GridLayoutComponent implements OnInit {
-
-
+export class GridLayoutComponent {
   constructor(public cardService: CardService, public statusService:StatusService) {
 
   }
 
   protected readonly CardService = CardService;
   protected readonly PriorityService = PriorityService;
-
-  ngOnInit() {
-  }
 }

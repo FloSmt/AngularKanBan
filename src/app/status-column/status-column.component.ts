@@ -67,17 +67,34 @@ export class StatusColumnComponent {
   addNewCardToColumn(event: { id: string; title: string; content: string }) {
     const targetColumnIndex: number = parseInt(event.id.split('-')[1]);
     this.cardService.addCard(event.title,event.content);
-    this.cards = this.cardService.getCardsWithStatus(this.status);
     this.setCardStatusBasedOnColumn(this.cardService.getCards()[this.cardService.getCards().length-1],targetColumnIndex);
+
+    const newCard = this.cardService.getCards()[this.cardService.getCards().length - 1];
+    this.cards.push(newCard);
+
+    //neue card wird in db eingefügt
+    this.insertDataInDb(targetColumnIndex,event.title, -1);
   }
 
   private updateStatusInDb(cardId:number, newStatusId:number) {
-    this.dbService.updateCardStatusInDb(cardId, newStatusId).subscribe(
+    this.dbService.updateCardInDb(cardId, null, newStatusId, null, null, null).subscribe(
         response => {
           console.log('Status ID successfully updated in database');
         }, error => {
           console.error('Error updating statuts ID: ', error);
         }
     )
+  }
+
+  insertDataInDb(newStatusId: number, title: string, priorityId: number): void {
+    this.dbService.insertNewCard(newStatusId, title, priorityId)
+      .subscribe(
+        response => {
+          console.log('Daten erfolgreich eingefügt', response);
+        },
+        error => {
+          console.error('Fehler beim Einfügen der Daten', error);
+        }
+      );
   }
 }
