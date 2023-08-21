@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode($response);
         exit();
     }
-
+    date_default_timezone_set('Europe/Berlin');
     $created = date('Y-m-d H:i:s');
 
     // SQL-Statement zum Einfügen neuer Karte
