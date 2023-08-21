@@ -1,8 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Status} from "../status";
-import {Priority} from "../priority";
 import {StatusService} from "../status.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../db.service";
 
 @Component({

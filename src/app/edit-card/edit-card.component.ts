@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Card} from "../card";
 import {CardService} from "../card.service";
 import {PriorityService} from "../priority.service";

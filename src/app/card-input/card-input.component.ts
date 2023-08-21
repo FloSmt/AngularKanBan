@@ -15,9 +15,6 @@ export class CardInputComponent {
   title: string = '';
   content: string = '';
 
-  constructor(private dbService : DataService, private statusService : StatusService) {
-  }
-
   addNewCard() {
     const minLength:number = 3;
     if(this.title.length >= minLength) {
