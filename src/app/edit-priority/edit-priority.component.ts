@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {CardService} from "../card.service";
 import {PriorityService} from "../priority.service";
 import {StatusService} from "../status.service";
@@ -18,7 +18,7 @@ export class EditPriorityComponent {
   priorities:Priority[] = [...this.priorityService.getPriorities()];
   prioritiesAmount:number = 0;
 
-  constructor(public cardService:CardService, public priorityService:PriorityService, public statusService:StatusService) {
+  constructor(public priorityService:PriorityService, public statusService:StatusService) {
   }
 
   closeWindow() {
