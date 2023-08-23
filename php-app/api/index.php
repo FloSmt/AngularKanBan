@@ -8,7 +8,10 @@ switch ($endpoint) {
   break;
 
   case 'get_status': include 'endpoints/get_status.php';
-    break;
+  break;
+
+  case 'get_priority': include 'endpoints/get_priority.php';
+  break;
 
   case 'update_card': include 'endpoints/update_card.php';
   break;

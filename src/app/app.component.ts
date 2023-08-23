@@ -25,6 +25,7 @@ export class AppComponent {
 
   constructor(public priorityService:PriorityService, public statusService:StatusService, private cardService: CardService) {
     this.statusService.loadStatusFromDb();
+    this.priorityService.loadPriorityFromDb();
     this.cardService.loadCardsFromDatabase();
   }
 }

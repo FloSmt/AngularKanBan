@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Priority} from "./priority";
+import {DataService} from "./db.service";
 
 @Injectable({
   providedIn: 'root'
@@ -30,20 +31,31 @@ export class PriorityService {
       name: "LOW"
     },
   ];
-  constructor() { }
+  constructor(private dbService : DataService) { }
 
   public getPriority(id:number):Priority {
-    //return (typeof this.priority.find(x => x.id === id) != "undefined") ? this.priority.find(x => x.id === id)! : this.default;
-    //return this.priority.find(p => p.id === id) || this.default;
-    const foundPriority = this.priority.find(p => p.id === id);
-    return foundPriority ? foundPriority : this.default;
+    return (typeof this.priority.find(x => x.id === id) != "undefined") ? this.priority.find(x => x.id === id)! : this.getPriority(0);
   }
 
   public getPriorities():Priority[] {
     return this.priority;
   }
 
-  public setPriorities(priorities:Priority[]) {
-    this.priority = priorities;
+  public setPriorities(priority: Priority) {
+    this.priority.find(x=>x.id == priority.id)!.color = priority.color;
+    this.priority.find(x=>x.id == priority.id)!.name = priority.name;
   }
+
+  loadPriorityFromDb() {
+    this.dbService.getPriorityFromDb().subscribe((data) => {
+      for (let i = 0; i < data.length; i++) {
+        const newPriority : Priority = {id: data[i].id-1, color: data[i].color, name: data[i].name};
+        this.setPriorities(newPriority);
+      }
+      return true;
+    });
+    return false;
+  }
+
+
 }

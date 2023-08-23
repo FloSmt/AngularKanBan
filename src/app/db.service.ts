@@ -51,4 +51,8 @@ export class DataService {
     console.log(data);
     return this.http.post(url, data);
   }
+
+  getPriorityFromDb(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}?endpoint=get_priority`);
+  }
 }
