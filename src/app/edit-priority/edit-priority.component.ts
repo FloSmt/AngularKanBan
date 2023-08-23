@@ -48,11 +48,13 @@ export class EditPriorityComponent {
 
       this.priorities.find(x => x.id == priority.id)!.color = color;
       this.priorities.find(x => x.id == priority.id)!.name = name;
+
+      const newPriority: Priority = {id: this.priorities.find(x => x.id == priority.id)!.id, color: color, name: name};
+      this.priorityService.setPriorities(newPriority);
+
+      //Datenbankanbindung: Update würde hier 4x ausgeführt
     }
-
-    this.priorityService.setPriorities(this.priorities);
     this.closeWindow();
-
   }
 
   drop(event: CdkDragDrop<string[]>) {
