@@ -9,7 +9,6 @@ import {BehaviorSubject, Observable} from "rxjs";
 })
 export class StatusService {
 
-  private status$$ = new BehaviorSubject<Status[]>([]);
   status:Status[] = [
     {
       id: 0,
@@ -45,10 +44,6 @@ export class StatusService {
 
   public getStatus(id:number):Status {
     return (typeof this.status.find(x => x.id === id) != "undefined") ? this.status.find(x => x.id === id)! : this.getStatus(0);
-  }
-
-  getStatus$(): Observable<Status[]> {
-    return this.status$$.asObservable();
   }
 
   public getStatusList(): Status[] {
