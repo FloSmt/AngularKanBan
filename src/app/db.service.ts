@@ -55,4 +55,12 @@ export class DataService {
   getPriorityFromDb(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}?endpoint=get_priority`);
   }
+
+  deleteCardinDb(id:number): Observable<any> {
+    const url = `${this.apiUrl}?endpoint=delete_card&id=${id}`;
+    const data = {
+      id:id
+    };
+    return this.http.post<any>(url, data);
+  }
 }

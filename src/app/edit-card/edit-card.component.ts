@@ -249,6 +249,9 @@ export class EditCardComponent {
   delete() {
     this.cardService.deleteCard(this.GetId());
     this.closeWindow();
+
+    //datenbankeintrag löschen
+    this.deleteCardinDb(this.GetId());
   }
 
   private updateCardInDb(cardId: number, title: string, newStatusId: number, priorityId: number, description: string, edited: Date | null) {
@@ -257,6 +260,16 @@ export class EditCardComponent {
         console.log('Card successfully updated in database');
       }, error => {
         console.error('Error updating card: ', error);
+      }
+    )
+  }
+
+  private deleteCardinDb(id:number) {
+    this.dataService.deleteCardinDb(id).subscribe(
+      response => {
+        console.log('Card successfully deleted');
+      }, error => {
+        console.log('Error deleting card: ', error);
       }
     )
   }

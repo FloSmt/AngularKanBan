@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Status} from "./status";
 import {DataService} from "./db.service";
-import {BehaviorSubject, Observable} from "rxjs";
-
 
 @Injectable({
   providedIn: 'root'
