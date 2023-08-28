@@ -21,5 +21,8 @@ switch ($endpoint) {
 
   case 'create': include 'endpoints/create.php';
   break;
+
+  case 'delete_card': include 'endpoints/delete_card.php';
+  break;
   }
 ?>
