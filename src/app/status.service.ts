@@ -10,28 +10,28 @@ export class StatusService {
   status:Status[] = [
     {
       id: 0,
-      color: "#ffffff",
+      color: "#fafafa",
       title: "",
       limit: false,
       max: 0
     },
     {
       id: 1,
-      color: "#ffffff",
+      color: "#fafafa",
       title: "",
       limit: true,
       max: 0
     },
     {
       id: 2,
-      color: "#ffffff",
+      color: "#fafafa",
       title: "",
       limit: true,
       max: 0
     },
     {
       id: 3,
-      color: "#ffffff",
+      color: "#fafafa",
       title: "",
       limit: false,
       max: 0

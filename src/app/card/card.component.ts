@@ -30,5 +30,3 @@ export class CardComponent {
 
   protected readonly EditCardComponent = EditCardComponent;
 }
-
-
