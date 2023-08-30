@@ -48,7 +48,6 @@ export class DataService {
       limits: limits,
       max: max
     }
-    console.log(data);
     return this.http.post(url, data);
   }
 

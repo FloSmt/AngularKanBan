@@ -9,7 +9,7 @@
   overflow: hidden;
   border-top: 6px solid;
   transition: all 0.3s ease-in-out;
-
+  box-shadow: 0 0 20px 0 rgb(91, 91, 91);
 }
 
 .column .title {
