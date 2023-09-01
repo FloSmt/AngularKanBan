@@ -46,13 +46,10 @@ export class StatusColumnComponent {
 
   //Wird beim verschieben einer Card ausgeführt
   drop(event: CdkDragDrop<Card[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
+    if (event.previousContainer !== event.container)  {
       const cardToMove = event.previousContainer.data[event.previousIndex];
       const targetColumnIndex = +event.container.id.split('-')[1];
       this.setCardStatusBasedOnColumn(cardToMove,targetColumnIndex);
-      this.cardService.updateColumns();
 
       this.updateStatusInDb(cardToMove.id, targetColumnIndex);
 
@@ -62,6 +59,9 @@ export class StatusColumnComponent {
         event.previousIndex,
         event.currentIndex,
       );
+
+      this.cardService.updateColumns();
+
     }
   }
 
