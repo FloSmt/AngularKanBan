@@ -12,74 +12,106 @@ import {BehaviorSubject, Observable} from "rxjs";
 })
 export class CardService {
   private cards$$ = new BehaviorSubject<Card[]>([]);
-  private cards : Card[] = [];
+  private allCards : Card[] = [];
+  private columnCards:any  = [];
 
+  constructor(public priorityService:PriorityService, private statusService:StatusService, private dataService : DataService) {
+  }
+
+  //Sortiert die column Cards neu
+  updateColumns() {
+    this.getCards$().subscribe(cards => {
+      this.columnCards = [];
+      for (const status of this.statusService.getStatusList()) {
+          this.columnCards.push(this.getCardsWithStatus(status));
+      }
+    })
+  }
+
+
+    //Fügt eine neu Card zur liste aller Cards hinzu
     addCard(title:string, description:string) {
       const date:Date = new Date(Date.now());
       // @ts-ignore
       const newCard: Card = {id: this.getNextId(), title:title, description:description, priority:this.priorityService.getPriority(-1), status: null, created: date, edited: null};
       this.pushCard(newCard);
+
+      this.updateColumns();
     }
 
+    //gibt die nächst möglich zu vergebende ID einer Card zurück
     private getNextId() :number {
-      if (this.cards.length != 0) {
-        return this.cards[this.cards.length-1].id+1;
+      if (this.allCards.length != 0) {
+        return this.allCards[this.allCards.length-1].id+1;
       }else {
         return 1;
       }
     }
 
+    //gibt alle Cards zurück
     getCards() : Card[] {
-      return this.cards;
+      return this.allCards;
     }
 
     getCards$(): Observable<Card[]> {
       return this.cards$$.asObservable();
     }
 
-  constructor(public priorityService:PriorityService, private statusService:StatusService, private dataService : DataService) {
-
-  }
-
   public setStatus(card:Card, status:Status) {
-    if (!(this.cards.find(x=>x.id == card.id))) {
+    if (!(this.allCards.find(x=>x.id == card.id))) {
       return;
     }
-    this.cards.find(x=>x.id == card.id)!.edited = new Date(Date.now());
-    this.cards.find(x=>x.id == card.id)!.status = status;
+    this.allCards.find(x=>x.id == card.id)!.edited = new Date(Date.now());
+    this.allCards.find(x=>x.id == card.id)!.status = status;
+
+    this.updateColumns();
   }
 
   //Card wird mit neuen Werten ersetzt
   public setCard(card:Card):void {
-      if (!(this.cards.find(x=>x.id == card.id))) {
+      if (!(this.allCards.find(x=>x.id == card.id))) {
         return;
       }
 
-    this.cards.find(x=>x.id == card.id)!.status = card.status;
-    this.cards.find(x=>x.id == card.id)!.priority = card.priority;
-    this.cards.find(x=>x.id == card.id)!.description = card.description;
-    this.cards.find(x=>x.id == card.id)!.title = card.title;
-    this.cards.find(x=>x.id == card.id)!.created = card.created;
-    this.cards.find(x=>x.id == card.id)!.edited = new Date(Date.now());
+    this.allCards.find(x=>x.id == card.id)!.status = card.status;
+    this.allCards.find(x=>x.id == card.id)!.priority = card.priority;
+    this.allCards.find(x=>x.id == card.id)!.description = card.description;
+    this.allCards.find(x=>x.id == card.id)!.title = card.title;
+    this.allCards.find(x=>x.id == card.id)!.created = card.created;
+    this.allCards.find(x=>x.id == card.id)!.edited = new Date(Date.now());
+
+    //alle Spalten werden geupdated
+    this.updateColumns();
   }
 
+  //löscht eine Card
   public deleteCard(id:number) {
-    if (!this.cards.find(x => x.id == id)) {
+    if (!this.allCards.find(x => x.id == id)) {
       return;
     }
 
     // @ts-ignore
-    var card: Card = this.cards.find(x => x.id == id);
-    var index: number = this.cards.indexOf(card);
+    var card: Card = this.allCards.find(x => x.id == id);
+    var index: number = this.allCards.indexOf(card);
 
-    this.cards.splice(index, 1);
-    this.cards$$.next(this.cards);
+    this.allCards.splice(index, 1);
+    this.cards$$.next(this.allCards);
+
+    //alle Spalten werden geupdated
+    this.updateColumns();
   }
 
-  public getCardsWithStatus(status: Status):Card[] {
+
+  //Gibt die Cards des jeweiligen Status in Priorisierter Reihenfolge zurück
+  public getCardsOfStatus(status:Status) {
+    return this.columnCards[status.id];
+  }
+
+  //Sortiert aus Allen Cards die Cards mit bestimmtem Status und sortiert diese nach Priorität
+  private getCardsWithStatus(status: Status):Card[] {
     let cards1:Card[] = [];
     // @ts-ignore
-      for (const card:Card of this.cards) {
+      for (const card:Card of this.allCards) {
       if (card.status === status) {
         cards1.push(card);
       }
@@ -100,6 +132,8 @@ export class CardService {
     return cards1;
   }
 
+
+  //Lädt alle Cards aus der Datenbank
     public loadCardsFromDatabase(): boolean {
         this.dataService.getCardsFromDb().subscribe((data) => {
           for (let i = 0; i < data.length; i++) {
@@ -111,8 +145,9 @@ export class CardService {
         return false;
     }
 
-    public pushCard(card: Card): void {
-      this.cards.push(card);
-      this.cards$$.next(this.cards);
+    //initialisiert jede Card in die Cards liste
+    private pushCard(card: Card): void {
+      this.allCards.push(card);
+      this.cards$$.next(this.allCards);
     }
 }

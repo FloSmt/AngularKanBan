@@ -2,18 +2,18 @@
 <div class="column" [style.border-color]="status.color">
   <div class="title" [style.background-color]="status.color + '4d'" (click)="openEdit()">
     <div><span>{{status.title}}</span></div>
-    <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="status.limit">{{cardService.getCardsWithStatus(status).length}}/{{status.max}}</div>
-    <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="!status.limit">{{cardService.getCardsWithStatus(status).length}}</div>
+    <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="status.limit">{{cardService.getCardsOfStatus(status).length}}/{{status.max}}</div>
+    <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="!status.limit">{{cardService.getCardsOfStatus(status).length}}</div>
   </div>
   <div class="input" [style.background-color]="status.color + '3a'">
     <hr [style.background-color]="status.color">
     <app-card-input [id]="'column-'+status.id" [color]="status.color" (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
   </div>
-  <div class="cards list" id="column-{{status.id}}" [style.border-color]="status.color + '3a'" cdkDropList [cdkDropListData]="cards" (cdkDropListDropped)="drop($event)">
-    <div class="card" *ngFor="let card of cards; let i = index">
-      <div class="priorityhr"  *ngIf=" i==0 || (cards[i-1].priority != cards[i].priority)">
+  <div class="cards list" id="column-{{status.id}}" [style.border-color]="status.color + '3a'" cdkDropList [cdkDropListData]="cardService.getCardsOfStatus(status)" (cdkDropListDropped)="drop($event)">
+    <div class="card" *ngFor="let card of cardService.getCardsOfStatus(status); let i = index">
+      <div class="priorityhr"  *ngIf=" i==0 || (cardService.getCardsOfStatus(status)[i-1].priority != cardService.getCardsOfStatus(status)[i].priority)">
         <hr>
-        <p [style.color]="cards[i].priority.color">{{cards[i].priority.name}}</p>
+        <p [style.color]="cardService.getCardsOfStatus(status)[i].priority.color">{{cardService.getCardsOfStatus(status)[i].priority.name}}</p>
         <hr>
       </div>
       <div class="box"  cdkDrag [cdkDragData]="card">

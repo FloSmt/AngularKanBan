@@ -179,10 +179,21 @@ export class EditCardComponent {
     this.editTitle = true;
   }
 
+  checkTitleInput() {
+    if ((<HTMLInputElement>document.getElementById("titleinput")).value.length < 3) {
+      document.getElementById("titleinput")!.classList.add("error");
+    }else {
+      document.getElementById("titleinput")!.classList.remove("error");
+
+    }
+  }
+
   //speichert den geänderten Titel temporär ab
   saveTmpTitle() {
     if (typeof (<HTMLInputElement>document.getElementById("titleinput")).value) {
-      this.tmpTitel = (<HTMLInputElement>document.getElementById("titleinput")).value;
+      if ((<HTMLInputElement>document.getElementById("titleinput")).value.length >= 3){
+        this.tmpTitel = (<HTMLInputElement>document.getElementById("titleinput")).value;
+      }
     }
 
     this.closeSelection();

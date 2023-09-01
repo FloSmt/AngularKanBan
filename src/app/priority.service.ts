@@ -38,19 +38,23 @@ export class PriorityService {
   ];
   constructor(private dbService : DataService) { }
 
+  //Gibt die Prioritäten nach ID zurück
   public getPriority(id:number):Priority {
     return (typeof this.priority.find(x => x.id === id) != "undefined") ? this.priority.find(x => x.id === id)! : this.getPriority(0);
   }
 
+  //Gibt die liste aller Prioritäten zurück
   public getPriorities():Priority[] {
     return this.priority;
   }
 
+  //update der Priorität
   public setPriorities(priority: Priority) {
     this.priority.find(x=>x.id == priority.id)!.color = priority.color;
     this.priority.find(x=>x.id == priority.id)!.name = priority.name;
   }
 
+  //Lädt die prioritäten aus der DB
   loadPriorityFromDb() {
     this.dbService.getPriorityFromDb().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
