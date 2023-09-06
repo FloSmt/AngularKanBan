@@ -113,6 +113,14 @@ export class CardService {
     // @ts-ignore
       for (const card:Card of this.allCards) {
       if (card.status === status) {
+
+        if (!card.priority) {
+          console.log(true);
+          console.log(card.priority);
+          card.priority = this.priorityService.getPriority(-1);
+          console.log(card.priority);
+        }
+
         cards1.push(card);
       }
     }
@@ -137,7 +145,15 @@ export class CardService {
     public loadCardsFromDatabase(): boolean {
         this.dataService.getCardsFromDb().subscribe((data) => {
           for (let i = 0; i < data.length; i++) {
-            const newCard: Card = {id: data[i].id, title: data[i].title, description: data[i].description, priority: this.priorityService.getPriority(data[i].priority), status: this.statusService.getStatus(data[i].status), created: data[i].created, edited: data[i].edited};
+            const newCard: Card = {
+              id: data[i].id,
+              title: data[i].title,
+              description: data[i].description,
+              priority: this.priorityService.getPriority(data[i].priority),
+              status: this.statusService.getStatus(data[i].status),
+              created: data[i].created,
+              edited: data[i].edited
+            };
             this.pushCard(newCard);
           }
           return true;

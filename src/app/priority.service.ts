@@ -1,46 +1,57 @@
 import { Injectable } from '@angular/core';
 import {Priority} from "./priority";
 import {DataService} from "./db.service";
+import {CardService} from "./card.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PriorityService {
 
-  default:Priority = {id:-1,color:"#808080",name:"UNSET"};
+  //Default Priorität UNSET
+  default:Priority = {id:-1, sortid: -1,color:"#808080",name:"UNSET"};
 
-  priority:Priority[] = [
-    {
-      id: -1,
-      color: "#808080",
-      name: "UNSET"
-    },
+  //Liste mit allen Prioritäten (hier Platzhalter, wird mit Datenbank aktualisiert)
+  private priority:Priority[] = [
     {
       id: 0,
-      color: "#7100B8",
-      name: "IMPORTANT"
+      sortid: 0,
+      color: "#ffffff",
+      name: ""
     },
     {
       id: 1,
-      color: "#ff0000",
-      name: "HIGH"
+      sortid: 0,
+      color: "#ffffff",
+      name: ""
     },
     {
       id: 2,
-      color: "#ffbf00",
-      name: "MEDIUM"
-    },
-    {
-      id: 3,
-      color: "#22AA09",
-      name: "LOW"
+      sortid: 0,
+      color: "#ffffff",
+      name: ""
     },
   ];
+
+
+  //Temporäre Liste der Prioritäten, um diese im Edit menü umsortieren zu können
+  tmpPriorities:Priority[] = [];
+
+  //gibt die Temporäre Liste zurück
+  public getTmpPriorities(){
+    return this.tmpPriorities;
+  }
+
+  //aktuallisiert Tmp list mit aktueller Reihenfolge
+  public updateTmpPriorities() {
+    this.tmpPriorities = this.priority.slice(0, this.priority.length);
+  }
+
   constructor(private dbService : DataService) { }
 
   //Gibt die Prioritäten nach ID zurück
   public getPriority(id:number):Priority {
-    return (typeof this.priority.find(x => x.id === id) != "undefined") ? this.priority.find(x => x.id === id)! : this.getPriority(0);
+    return (typeof this.priority.find(x => x.id === id) != "undefined") ? this.priority.find(x => x.id === id)! : this.default;
   }
 
   //Gibt die liste aller Prioritäten zurück
@@ -48,23 +59,45 @@ export class PriorityService {
     return this.priority;
   }
 
+  public deletePriority(id:number) {
+    if (this.priority.find(x=>x.id == id)) {
+      let index = this.priority.indexOf(this.priority.find(x=>x.id == id)!);
+      this.priority.splice(index, 1);
+    }
+  }
+
   //update der Priorität
   public setPriorities(priority: Priority) {
-    this.priority.find(x=>x.id == priority.id)!.color = priority.color;
-    this.priority.find(x=>x.id == priority.id)!.name = priority.name;
+    if (this.priority.find(x=>x.id == priority.id)) {
+      this.priority.find(x=>x.id == priority.id)!.color = priority.color;
+      this.priority.find(x=>x.id == priority.id)!.sortid = priority.sortid;
+      this.priority.find(x=>x.id == priority.id)!.name = priority.name;
+
+    }else {
+
+      this.priority.push(priority);
+    }
+
+    this.sortPriorityList();
   }
 
   //Lädt die prioritäten aus der DB
   loadPriorityFromDb() {
     this.dbService.getPriorityFromDb().subscribe((data) => {
+      this.priority = [];
       for (let i = 0; i < data.length; i++) {
-        const newPriority : Priority = {id: data[i].id-1, color: data[i].color, name: data[i].name};
+        const newPriority : Priority = {id: data[i].id, sortid: data[i].sortid, color: data[i].color, name: data[i].name};
         this.setPriorities(newPriority);
       }
+
+      this.updateTmpPriorities();
       return true;
     });
     return false;
   }
 
-
+  //Sortiert die liste nach der Sortid (aufsteigend)
+  private sortPriorityList() {
+    this.priority.sort(function (a,b) {return (a.sortid)-(b.sortid);});
+  }
 }

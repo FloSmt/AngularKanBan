@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `priority` (
   `id` int NOT NULL,
+  `sortid` int NOT NULL,
   `color` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
   `name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -37,11 +38,12 @@ CREATE TABLE `priority` (
 -- Daten für Tabelle `priority`
 --
 
-INSERT INTO `priority` (`id`, `color`, `name`) VALUES
-(1, '#7100B8', 'IMPORTANT'),
-(2, '#ff0000', 'HIGH'),
-(3, '#ffbf00', 'MEDIUM'),
-(4, '#22AA09', 'LOW');
+INSERT INTO `priority` (`id`, `sortid`, `color`, `name`) VALUES
+(-1, -1, '#7100B8', 'UNSET'),
+(1, 0, '#7100B8', 'IMPORTANT'),
+(2, 1, '#ff0000', 'HIGH'),
+(3, 2, '#ffbf00', 'MEDIUM'),
+(4, 3, '#22AA09', 'LOW');
 
 --
 -- Indizes der exportierten Tabellen

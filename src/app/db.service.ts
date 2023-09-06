@@ -52,8 +52,41 @@ export class DataService {
     return this.http.post(url, data);
   }
 
+  //fügt eine neue priorität in der db hinzu
+  insertNewPriority(id:number, sortid:number, name:string, color:string) {
+    const url = `${this.apiUrl}?endpoint=create_priority&id=${id}&name=${name}&sortid=${sortid}&color=${color}`;
+    const data = {
+      id: id,
+      sortid: sortid,
+      color:color,
+      name: name
+    };
+
+    return this.http.post(url, data);
+  }
+
   getPriorityFromDb(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}?endpoint=get_priority`);
+  }
+
+  updatePriorityInDb(id: number, sortid:number, name: string, color: string) {
+    let pid = id;
+    const url = `${this.apiUrl}?endpoint=update_priority&id=${pid}&sortid=${sortid}&name=${name}&color=${color}`;
+    const data =  {
+      id: pid,
+      sortid: sortid,
+      name: name,
+      color: color
+    }
+    return this.http.post(url, data);
+  }
+
+  deletePriorityinDb(id:number): Observable<any> {
+    const url = `${this.apiUrl}?endpoint=delete_priority&id=${id}`;
+    const data = {
+      id:id
+    };
+    return this.http.post<any>(url, data);
   }
 
   deleteCardinDb(id:number): Observable<any> {

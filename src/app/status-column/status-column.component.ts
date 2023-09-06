@@ -24,12 +24,10 @@ export class StatusColumnComponent {
     if (status.limit) {
       if (this.cardService.getCardsOfStatus(status).length > status.max) {
         return "#f83000";
-      }else {
-        return "#9f9f9f";
       }
-    }else {
-      return "#9f9f9f";
     }
+
+    return "#9f9f9f";
   }
 
   //öffnet das Edit Menü, bei Klick auf Karte

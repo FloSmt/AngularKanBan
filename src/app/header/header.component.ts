@@ -9,5 +9,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
+  openEditPriorityWindow() {
+    const modalElement = document.getElementById('editpriority');
+    if (modalElement) {
+      modalElement.style.display = 'flex';
+    }
+  }
 }
