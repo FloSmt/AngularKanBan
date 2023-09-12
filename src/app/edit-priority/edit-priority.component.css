@@ -40,7 +40,7 @@
   background-color: rgba(242, 242, 242, 0.57);
   overflow-y: scroll;
 }
-.main p {
+.main .high, .main .low {
   font-size: 0.75rem;
   text-align: left;
   font-weight: bold;
@@ -69,24 +69,28 @@
 .main .add {
   padding: 5px;
   display: flex;
+  color: lightgray;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  margin: 10px 0 0;
   text-align: center;
   cursor: pointer;
-  height: 2rem;
-  background-color: #99ceff;
+  min-height: 2.5rem;
+  background-color: white;
   border-radius: 5px;
-  border: 2px solid #00000011;
+  border: 3px solid lightgray;
   transition: all 0.25s ease-in-out;
 }
 
 .main .add:hover {
-  background-color: #b5deff;
+  background-color: lightgray;
+  color: gray;
+  border-color: gray;
 }
 
-.main .add h3 {
+.main .add p {
   margin: 0;
+  font-size: 40px;
 }
 
 .main .priorityList {

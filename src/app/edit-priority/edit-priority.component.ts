@@ -56,8 +56,6 @@ export class EditPriorityComponent {
   }
 
   save() {
-    console.log(this.priorityService.getTmpPriorities());
-    console.log(this.priorityService.getPriorities());
 
     for (const id of this.deleteIds) {
       this.deletePriorityinDb(id);

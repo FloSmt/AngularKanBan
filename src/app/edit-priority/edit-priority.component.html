@@ -12,10 +12,10 @@
             <app-edit-priority-div [priority]="priority" (deleteFct)="delete(priority)"></app-edit-priority-div>
           </div>
         </div>
+      <div class="add" (click)="add()">
+        <p>+</p>
+      </div>
       <p class="low">least important <span>(Drag & Drop to sort)</span></p>
-        <div class="add" (click)="add()">
-          <h3>Add Priority</h3>
-        </div>
     </div>
     <div class="footer">
       <button class="cancel button" (click)="closeWindow()">Cancel</button>
