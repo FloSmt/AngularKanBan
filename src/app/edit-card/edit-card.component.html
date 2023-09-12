@@ -6,9 +6,9 @@
         <div class="informationLine"><span class="id">#{{ GetId() }}</span><span class="createdate">(created {{ time_ago(GetCreateDate()) }})</span></div>
       </div>
       <form action="">
-        <input id="titleinput" *ngIf="editTitle" type="text" value="{{GetTitle()}}">
+        <input id="titleinput" *ngIf="editTitle" type="text" value="{{GetTitle()}}" (input)="checkTitleInput()" maxlength="30">
         <h1 *ngIf="!editTitle">{{GetTitle()}}</h1>
-        <button *ngIf="editTitle" class="edit button" (click)="saveTmpTitle()">Fertig</button>
+        <button *ngIf="editTitle" class="edit button" id="saveTitle" (click)="saveTmpTitle()">Fertig</button>
         <button *ngIf="!editTitle" class="edit button" (click)="openEditTitle()">Edit Title</button>
       </form>
     </div>

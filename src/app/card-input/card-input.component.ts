@@ -13,12 +13,11 @@ export class CardInputComponent {
   @Input() color! : string;
   @Output() addCardToColumn = new EventEmitter<{id:string; title: string; content: string }>();
   title: string = '';
-  content: string = '';
 
   addNewCard() {
     const minLength:number = 3;
     if(this.title.length >= minLength) {
-      this.addCardToColumn.emit({id: this.id, title: this.title, content: this.content});
+      this.addCardToColumn.emit({id: this.id, title: this.title, content: ""});
     }else {
       alert("Sie müssen mindestens 3 Zeichen eingeben!")
     }

@@ -7,6 +7,7 @@ import {DataService} from "./db.service";
 })
 export class StatusService {
 
+  //Liste alle standard Status
   status:Status[] = [
     {
       id: 0,
@@ -40,14 +41,17 @@ export class StatusService {
 
   constructor(private dbService: DataService) { }
 
+  //gibt Status mit jeweiliger ID zurück
   public getStatus(id:number):Status {
     return (typeof this.status.find(x => x.id === id) != "undefined") ? this.status.find(x => x.id === id)! : this.getStatus(0);
   }
 
+  //gibt die Statusliste zurück
   public getStatusList(): Status[] {
     return this.status;
   }
 
+  //Lädt die Status von der Datenbank
   loadStatusFromDb() {
     this.dbService.getStatusFromDb().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
@@ -59,6 +63,7 @@ export class StatusService {
       return false;
   }
 
+  //Update eines bestimmten Status
   public setStatus(status:Status):void {
     this.status.find(x=>x.id == status.id)!.color = status.color;
     this.status.find(x=>x.id == status.id)!.limit = status.limit;
