@@ -1,5 +1,5 @@
 <!-- Status Column -->
-<div class="column" [style.border-color]="status.color">
+<div class="column" [style.border-color]="status.color" *ngIf="!statusService.isLoadingStatus">
   <div class="title" [style.background-color]="status.color + '4d'" (click)="openEdit()">
     <div><span>{{status.title}}</span></div>
     <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="status.limit">{{cardService.getCardsOfStatus(status).length}}/{{status.max}}</div>
@@ -10,17 +10,42 @@
     <app-card-input [id]="'column-'+status.id" [color]="status.color" (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
   </div>
   <div class="cards list" id="column-{{status.id}}" [style.border-color]="status.color + '3a'" cdkDropList [cdkDropListData]="cardService.getCardsOfStatus(status)" (cdkDropListDropped)="drop($event)">
-    <div class="card" *ngFor="let card of cardService.getCardsOfStatus(status); let i = index">
-      <div class="priorityhr"  *ngIf=" i==0 || (cardService.getCardsOfStatus(status)[i-1].priority != cardService.getCardsOfStatus(status)[i].priority)">
-        <hr>
-        <p [style.color]="cardService.getCardsOfStatus(status)[i].priority.color">{{cardService.getCardsOfStatus(status)[i].priority.name}}</p>
-        <hr>
-      </div>
-      <div class="box"  cdkDrag [cdkDragData]="card">
-        <app-card [card]="card"></app-card>
+    <div *ngIf="(!cardService.isCardsLoading) && (!priorityService.isPriorityLoading)">
+      <div class="card" *ngFor="let card of cardService.getCardsOfStatus(status); let i = index">
+        <div class="priorityhr"  *ngIf=" i==0 || (cardService.getCardsOfStatus(status)[i-1].priority != cardService.getCardsOfStatus(status)[i].priority)">
+          <hr>
+          <p [style.color]="cardService.getCardsOfStatus(status)[i].priority.color">{{cardService.getCardsOfStatus(status)[i].priority.name}}</p>
+          <hr>
+        </div>
+        <div class="box"  cdkDrag [cdkDragData]="card">
+          <app-card [card]="card"></app-card>
+        </div>
       </div>
     </div>
+
+    <div *ngIf="(cardService.isCardsLoading) || (priorityService.isPriorityLoading)">
+      <div class="card">
+        <div class="skeleton-hr"></div>
+        <div class="box"><div class="skeleton-box"></div></div>
+        <div class="box"><div class="skeleton-box"></div></div>
+        <div class="box"><div class="skeleton-box"></div></div>
+        <div class="skeleton-hr"></div>
+        <div class="box"><div class="skeleton-box"></div></div>
+        <div class="box"><div class="skeleton-box"></div></div>
+        <div class="box"><div class="skeleton-box"></div></div>
+        <div class="skeleton-hr"></div>
+        <div class="box"><div class="skeleton-box"></div></div>
+        <div class="box"><div class="skeleton-box"></div></div>
+        <div class="box"><div class="skeleton-box"></div></div>
+        <div class="box"><div class="skeleton-box"></div></div>
+      </div>
+    </div>
+
   </div>
+</div>
+
+
+<div class="column skeleton" [style.border-color]="status.color" *ngIf="statusService.isLoadingStatus">
 </div>
 
 

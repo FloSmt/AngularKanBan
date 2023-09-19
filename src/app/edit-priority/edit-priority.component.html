@@ -6,12 +6,22 @@
     </div>
     <div class="main">
       <p class="high">most important <span>(Drag & Drop to sort)</span></p>
-        <div class="priorityList" cdkDropList (cdkDropListDropped)="drop($event)">
+        <div *ngIf="!priorityService.isPriorityLoading" class="priorityList" cdkDropList (cdkDropListDropped)="drop($event)">
           <div class="priorityDiv" *ngFor="let priority of this.priorityService.getTmpPriorities(); let i = index;" cdkDrag [style.background-color]="'#ffffff'">
             {{setPrioritiesAmount(i+1)}}
             <app-edit-priority-div [priority]="priority" (deleteFct)="delete(priority)"></app-edit-priority-div>
           </div>
         </div>
+
+        <div *ngIf="priorityService.isPriorityLoading" class="priorityList">
+          <div class="priorityDiv">
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+          </div>
+        </div>
+
       <div class="add" (click)="add()">
         <p>+</p>
       </div>

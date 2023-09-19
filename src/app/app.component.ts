@@ -3,6 +3,7 @@ import {Card} from "./card";
 import {PriorityService} from "./priority.service";
 import {StatusService} from "./status.service";
 import {CardService} from "./card.service";
+import { firstValueFrom, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -24,8 +25,13 @@ export class AppComponent {
   };
 
   constructor(public priorityService:PriorityService, public statusService:StatusService, private cardService: CardService) {
-    this.statusService.loadStatusFromDb();
-    this.priorityService.loadPriorityFromDb();
-    this.cardService.loadCardsFromDatabase();
+    this.loadFromDB();
   }
+
+  async loadFromDB() {
+    await firstValueFrom(this.statusService.loadStatusFromDb());
+    await firstValueFrom(this.priorityService.loadPriorityFromDb());
+    await firstValueFrom(this.cardService.loadCardsFromDatabase());
+  }
+
 }

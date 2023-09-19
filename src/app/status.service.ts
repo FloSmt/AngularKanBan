@@ -1,11 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Status} from "./status";
 import {DataService} from "./db.service";
+import {Observable, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatusService {
+
+
+  public isLoadingStatus:boolean = true;
 
   //Liste alle standard Status
   status:Status[] = [
@@ -52,15 +56,17 @@ export class StatusService {
   }
 
   //Lädt die Status von der Datenbank
-  loadStatusFromDb() {
-    this.dbService.getStatusFromDb().subscribe((data) => {
-      for (let i = 0; i < data.length; i++) {
-        const newStatus: Status = {id: data[i].id-1, title: data[i].title, color: data[i].color, limit: data[i].limits, max: data[i].max};
-        this.setStatus(newStatus);
-      }
-        return true;
-    });
-      return false;
+  loadStatusFromDb(): Observable<any> {
+    return this.dbService.getStatusFromDb().pipe(
+      tap((data) => {
+        for (let i = 0; i < data.length; i++) {
+          const newStatus: Status = {id: data[i].id-1, title: data[i].title, color: data[i].color, limit: data[i].limits, max: data[i].max};
+          this.setStatus(newStatus);
+        }
+        this.isLoadingStatus = false;
+        console.log("Status loaded");
+      })
+    )
   }
 
   //Update eines bestimmten Status
