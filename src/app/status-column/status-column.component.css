@@ -4,6 +4,7 @@
   background-color: rgb(255, 255, 255);
   text-align: center;
   border-radius: 5px;
+  border-color: lightgray;
   word-wrap: break-word;
   height: 85vh;
   overflow: hidden;
@@ -20,6 +21,7 @@
   padding: 10px;
   height: 3rem;
   cursor: pointer;
+  background-color: #f4f4f4;
 }
 
 .title span {
@@ -37,6 +39,10 @@
   margin: 0 10px;
   font-weight: bold;
   font-size: 0.6rem;
+}
+
+.card .box {
+  margin-bottom: 10px;
 }
 
 .priorityhr hr{
@@ -66,9 +72,39 @@
   overflow-y: scroll;
   height: 100%;
   border-radius: 0 0 5px 5px;
-  border: 5px solid black;
+  border: 5px solid #f4f4f4;
   border-top: none;
 }
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: #dfdfdf;
+  }
+
+  100% {
+    background-color: #d3d3d3;
+  }
+}
+
+.skeleton {
+  border: none;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.skeleton-box {
+  width: 100%;
+  border-radius: 5px;
+  height: 3.5rem;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.skeleton-hr {
+  width: 100%;
+  height: 5px;
+  margin-bottom: 10px;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
 
 .column .card {
   padding: 0 10px 0 10px;

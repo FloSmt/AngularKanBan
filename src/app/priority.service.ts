@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Priority} from "./priority";
 import {DataService} from "./db.service";
-import {CardService} from "./card.service";
+import {catchError, of, tap, throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,8 @@ export class PriorityService {
 
   //Default Priorität UNSET
   default:Priority = {id:-1, sortid: -1,color:"#808080",name:"UNSET"};
+
+  public isPriorityLoading = true;
 
   //Liste mit allen Prioritäten (hier Platzhalter, wird mit Datenbank aktualisiert)
   private priority:Priority[] = [
@@ -83,17 +85,20 @@ export class PriorityService {
 
   //Lädt die prioritäten aus der DB
   loadPriorityFromDb() {
-    this.dbService.getPriorityFromDb().subscribe((data) => {
-      this.priority = [];
-      for (let i = 0; i < data.length; i++) {
-        const newPriority : Priority = {id: data[i].id, sortid: data[i].sortid, color: data[i].color, name: data[i].name};
-        this.setPriorities(newPriority);
-      }
+    return this.dbService.getPriorityFromDb()
+      .pipe(
+        tap((data) => {
+          this.priority = [];
+          for (let i = 0; i < data.length; i++) {
+            const newPriority : Priority = {id: data[i].id, sortid: data[i].sortid, color: data[i].color, name: data[i].name};
+            this.setPriorities(newPriority);
+          }
 
-      this.updateTmpPriorities();
-      return true;
-    });
-    return false;
+          this.updateTmpPriorities();
+          this.isPriorityLoading = false;
+          console.log("priority loaded");
+        })
+      )
   }
 
   //Sortiert die liste nach der Sortid (aufsteigend)

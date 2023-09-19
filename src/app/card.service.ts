@@ -5,7 +5,7 @@ import {StatusService} from "./status.service";
 import {Status} from "./status";
 import {Priority} from "./priority";
 import {DataService} from "./db.service";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,8 @@ export class CardService {
   private cards$$ = new BehaviorSubject<Card[]>([]);
   private allCards : Card[] = [];
   private columnCards:any  = [];
+
+  public isCardsLoading:boolean = true;
 
   constructor(public priorityService:PriorityService, private statusService:StatusService, private dataService : DataService) {
   }
@@ -142,23 +144,26 @@ export class CardService {
 
 
   //Lädt alle Cards aus der Datenbank
-    public loadCardsFromDatabase(): boolean {
-        this.dataService.getCardsFromDb().subscribe((data) => {
-          for (let i = 0; i < data.length; i++) {
-            const newCard: Card = {
-              id: data[i].id,
-              title: data[i].title,
-              description: data[i].description,
-              priority: this.priorityService.getPriority(data[i].priority),
-              status: this.statusService.getStatus(data[i].status),
-              created: data[i].created,
-              edited: data[i].edited
-            };
-            this.pushCard(newCard);
-          }
-          return true;
-        });
-        return false;
+    public loadCardsFromDatabase() {
+        return this.dataService.getCardsFromDb()
+          .pipe(
+            tap((data) => {
+              for (let i = 0; i < data.length; i++) {
+                const newCard: Card = {
+                  id: data[i].id,
+                  title: data[i].title,
+                  description: data[i].description,
+                  priority: this.priorityService.getPriority(data[i].priority),
+                  status: this.statusService.getStatus(data[i].status),
+                  created: data[i].created,
+                  edited: data[i].edited
+                };
+                this.pushCard(newCard);
+              }
+              this.isCardsLoading = false;
+              console.log("Cards loaded")
+            })
+          )
     }
 
     //initialisiert jede Card in die Cards liste

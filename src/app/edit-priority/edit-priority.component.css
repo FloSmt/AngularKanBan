@@ -28,6 +28,24 @@
   cursor: pointer;
 }
 
+@keyframes skeleton-loading {
+  0% {
+    background-color: #dfdfdf;
+  }
+
+  100% {
+    background-color: #d3d3d3;
+  }
+}
+
+.skeleton {
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
 .main {
   display: flex;
   flex-direction: column;

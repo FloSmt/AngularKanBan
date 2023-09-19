@@ -5,6 +5,7 @@ import {Status} from "../status";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {Card} from "../card";
 import {DataService} from "../db.service";
+import {PriorityService} from "../priority.service";
 
 
 @Component({
@@ -15,7 +16,7 @@ import {DataService} from "../db.service";
 export class StatusColumnComponent {
   @Input() status! : Status;
 
-  constructor(public cardService:CardService, public statusService:StatusService, private dbService: DataService) {
+  constructor(public cardService:CardService, public statusService:StatusService, private dbService: DataService, public priorityService:PriorityService) {
     this.cardService.updateColumns();
   }
 
