@@ -11,12 +11,14 @@ import {StatusService} from "../status.service";
 export class CardInputComponent {
   @Input() id!: string;
   @Input() color! : string;
+  @Input() disabled! : boolean;
+
   @Output() addCardToColumn = new EventEmitter<{id:string; title: string; content: string }>();
   title: string = '';
 
   addNewCard() {
     const minLength:number = 3;
-    if(this.title.length >= minLength) {
+    if((this.title.length >= minLength) && !this.disabled) {
       this.addCardToColumn.emit({id: this.id, title: this.title, content: ""});
     }else {
       alert("Sie müssen mindestens 3 Zeichen eingeben!")

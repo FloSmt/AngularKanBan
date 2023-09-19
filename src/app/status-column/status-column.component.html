@@ -7,7 +7,7 @@
   </div>
   <div class="input" [style.background-color]="status.color + '3a'">
     <hr [style.background-color]="status.color">
-    <app-card-input [id]="'column-'+status.id" [color]="status.color" (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
+    <app-card-input [disabled]="cardService.isCardsLoading" [id]="'column-'+status.id" [color]="status.color" (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
   </div>
   <div class="cards list" id="column-{{status.id}}" [style.border-color]="status.color + '3a'" cdkDropList [cdkDropListData]="cardService.getCardsOfStatus(status)" (cdkDropListDropped)="drop($event)">
     <div *ngIf="(!cardService.isCardsLoading) && (!priorityService.isPriorityLoading)">
