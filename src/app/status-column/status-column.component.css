@@ -78,11 +78,11 @@
 
 @keyframes skeleton-loading {
   0% {
-    background-color: #d1d1d1;
+    background-color: #dfdfdf;
   }
 
   100% {
-    background-color: #cacaca;
+    background-color: #d3d3d3;
   }
 }
 
