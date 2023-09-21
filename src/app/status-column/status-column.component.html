@@ -1,15 +1,14 @@
 <!-- Status Column -->
 <div class="column" [style.border-color]="status.color" *ngIf="!statusService.isLoadingStatus">
-  <div class="title" [style.background-color]="status.color + '4d'" (click)="openEdit()">
+  <div class="title" (click)="openEdit()" [style.background-color]="status.color + '12'">
     <div><span>{{status.title}}</span></div>
     <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="status.limit">{{cardService.getCardsOfStatus(status).length}}/{{status.max}}</div>
     <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="!status.limit">{{cardService.getCardsOfStatus(status).length}}</div>
   </div>
-  <div class="input" [style.background-color]="status.color + '3a'">
-    <hr [style.background-color]="status.color">
+  <div class="input" [style.background-color]="status.color + '12'">
     <app-card-input [id]="'column-'+status.id" [color]="status.color" (addCardToColumn)="addNewCardToColumn($event)"></app-card-input>
   </div>
-  <div class="cards list" id="column-{{status.id}}" [style.border-color]="status.color + '3a'" cdkDropList [cdkDropListData]="cardService.getCardsOfStatus(status)" (cdkDropListDropped)="drop($event)">
+  <div class="cards list" id="column-{{status.id}}"cdkDropList [cdkDropListData]="cardService.getCardsOfStatus(status)" (cdkDropListDropped)="drop($event)">
     <div *ngIf="(!cardService.isCardsLoading) && (!priorityService.isPriorityLoading)">
       <div class="card" *ngFor="let card of cardService.getCardsOfStatus(status); let i = index">
         <div class="priorityhr"  *ngIf=" i==0 || (cardService.getCardsOfStatus(status)[i-1].priority != cardService.getCardsOfStatus(status)[i].priority)">

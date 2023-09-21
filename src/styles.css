@@ -1,5 +1,10 @@
-
 * {
+
+  --whitegray: #f4f4f4;
+  --lightgray: rgba(242, 242, 242, 0.57);
+  --lightgray_hover: rgba(230, 230, 230, 0.57);
+  --gray: #808080;
+
   font-family: 'Lato', sans-serif;
   font-size: 20px;
 }
@@ -7,6 +12,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: var(--whitegray);
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
 

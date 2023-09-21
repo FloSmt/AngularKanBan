@@ -1,6 +1,7 @@
 .container {
-  display: grid;
-  gap: 1rem;
-  margin: 1rem;
-  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
+  margin-top: 5rem;
 }
