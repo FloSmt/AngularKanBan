@@ -1,23 +1,21 @@
 .card {
-  border: 2px solid lightgray;
+  border-left: 8px solid lightgray;
   border-radius: 5px;
   max-width: 100%;
-  padding: 5px;
+  padding: 10px 5px 10px 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  background-color: var(--lightgray);
   overflow: hidden;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 
 }
 
-.card .priority {
-  min-width: 10px;
-  min-height: 10px;
-  border-radius: 100%;
-  margin-left: 10px;
-  margin-right: 20px;
-  background-color: greenyellow;
+.card:hover {
+  background-color: var(--lightgray_hover);
 }
 
 .card .content {
@@ -25,19 +23,25 @@
   display: flex;
   align-items: center;
   justify-content: left;
+  padding-left: 10px;
 }
 
 .card .title {
   margin: 0;
-  font-size: 25px;
+  font-size: 22px;
 }
 
 .card .informationLine {
   margin: 0;
   color: gray;
   padding-right: 10px;
-  font-size: 15px;
+  display: flex;
+  align-items: center;
   font-weight: 500;
+}
+
+.card .informationLine span {
+  font-size: 15px;
 }
 
 .card .profilimg {

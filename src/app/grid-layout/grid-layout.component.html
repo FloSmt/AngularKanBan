@@ -1,4 +1,4 @@
-<div class="container" cdkDropListGroup [style.grid-template-columns]="'repeat(' + statusService.getStatusList().length + ', minmax(10%,100%)'">
+<div class="container" cdkDropListGroup>
 
     <!-- Column -->
   <div *ngFor="let status of statusService.getStatusList()">

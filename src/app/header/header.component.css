@@ -5,6 +5,10 @@ header {
   text-align: center;
   background-color: white;
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 3.5rem;
   justify-content: space-between;
   align-items: center;
@@ -35,7 +39,6 @@ h2 {
 
 .button {
   padding: 8px 15px 8px 15px;
-  border: none;
   color: white;
   background-color: dodgerblue;
   outline: none;
@@ -43,6 +46,7 @@ h2 {
   font-weight: 600;
   font-size: 18px;
   cursor: pointer;
+  border: 2px solid dodgerblue;
   transition: all 0.25s ease-in-out;
 }
 
@@ -54,6 +58,8 @@ h2 {
 
 .button:hover {
   background-color: #196abc;
+  border-radius: 10px;
+  border-color: #196abc;
 }
 
 .light:hover {
