@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Status} from "./status";
 import {DataService} from "./db.service";
 import {Observable, tap} from "rxjs";
+import {Priority} from "./priority";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ import {Observable, tap} from "rxjs";
 export class StatusService {
 
 
-  public isLoadingStatus:boolean = true;
+  public isStatusLoading:boolean = true;
+  default:Status = {id:-1, color:"#808080", title:"UNSET", limit: false, max: 0};
+
 
   //Liste alle standard Status
   status:Status[] = [
@@ -47,7 +50,7 @@ export class StatusService {
 
   //gibt Status mit jeweiliger ID zurück
   public getStatus(id:number):Status {
-    return (typeof this.status.find(x => x.id === id) != "undefined") ? this.status.find(x => x.id === id)! : this.getStatus(0);
+    return (typeof this.status.find(x => x.id === id) != "undefined") ? this.status.find(x => x.id === id)! : this.default;
   }
 
   //gibt die Statusliste zurück
@@ -63,7 +66,7 @@ export class StatusService {
           const newStatus: Status = {id: data[i].id-1, title: data[i].title, color: data[i].color, limit: data[i].limits, max: data[i].max};
           this.setStatus(newStatus);
         }
-        this.isLoadingStatus = false;
+        this.isStatusLoading = false;
         console.log("Status loaded");
       })
     )
@@ -71,9 +74,11 @@ export class StatusService {
 
   //Update eines bestimmten Status
   public setStatus(status:Status):void {
-    this.status.find(x=>x.id == status.id)!.color = status.color;
-    this.status.find(x=>x.id == status.id)!.limit = status.limit;
-    this.status.find(x=>x.id == status.id)!.max = status.max;
-    this.status.find(x=>x.id == status.id)!.title = status.title;
+    if (this.status.find(x=>x.id == status.id)) {
+      this.status.find(x=>x.id == status.id)!.color = status.color;
+      this.status.find(x=>x.id == status.id)!.limit = status.limit;
+      this.status.find(x=>x.id == status.id)!.max = status.max;
+      this.status.find(x=>x.id == status.id)!.title = status.title;
+    }
   }
 }

@@ -1,5 +1,5 @@
 <!-- Status Column -->
-<div class="column" [style.border-color]="status.color" *ngIf="!statusService.isLoadingStatus">
+<div class="column" [style.border-color]="status.color" *ngIf="!statusService.isStatusLoading">
   <div class="title" (click)="openEdit()" [style.background-color]="status.color + '12'">
     <div><span>{{status.title}}</span></div>
     <div [style.background-color]="getColor(status) + '3a'" [style.color]="getColor(status) + 'ff'" class="limit" *ngIf="status.limit">{{cardService.getCardsOfStatus(status).length}}/{{status.max}}</div>
@@ -38,7 +38,7 @@
 </div>
 
 
-<div class="column skeleton" [style.border-color]="status.color" *ngIf="statusService.isLoadingStatus">
+<div class="column skeleton" [style.border-color]="status.color" *ngIf="statusService.isStatusLoading">
 </div>
 
 

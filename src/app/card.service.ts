@@ -22,8 +22,10 @@ export class CardService {
 
   //Sortiert die column Cards neu
   updateColumns() {
+    console.log("XXX update");
     this.getCards$().subscribe(cards => {
       this.columnCards = [];
+      console.log("XXX",this.statusService.getStatusList());
       for (const status of this.statusService.getStatusList()) {
           this.columnCards.push(this.getCardsWithStatus(status));
       }
@@ -117,10 +119,7 @@ export class CardService {
       if (card.status === status) {
 
         if (!card.priority) {
-          console.log(true);
-          console.log(card.priority);
           card.priority = this.priorityService.getPriority(-1);
-          console.log(card.priority);
         }
 
         cards1.push(card);
