@@ -21,6 +21,7 @@ export class EditCardComponent {
 
   closeWindow() {
     this.modalelement.nativeElement.style.display = "none";
+    this.modalelement.nativeElement.style.visibility = "hidden";
     this.tmpDescription = null;
     this.tmpTitel = null;
     this.tmpPriority = null;
@@ -55,6 +56,7 @@ export class EditCardComponent {
     const modalElement = document.getElementById('modalElement');
     if (modalElement) {
       modalElement.style.display = 'flex';
+      modalElement.style.visibility = 'visible';
     }
   }
 

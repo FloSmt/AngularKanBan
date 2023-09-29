@@ -16,7 +16,8 @@ export class EditStatusComponent {
 
 
   closeEdit() {
-    document.getElementById(this.status.id.toString())!.style.display = "none";
+    document.getElementById("status-edit-window-" + this.status.id.toString())!.style.display = "none";
+    document.getElementById("status-edit-window-" + this.status.id.toString())!.style.visibility = "hidden";
   }
 
   editTitle:boolean = false;

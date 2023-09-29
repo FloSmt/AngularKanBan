@@ -1,6 +1,7 @@
 .window {
   position: fixed;
   display: none;
+  visibility: hidden;
   justify-content: center;
   align-items: center;
   top: 0;
