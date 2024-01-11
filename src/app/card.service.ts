@@ -22,10 +22,8 @@ export class CardService {
 
   //Sortiert die column Cards neu
   updateColumns() {
-    console.log("XXX update");
     this.getCards$().subscribe(cards => {
       this.columnCards = [];
-      console.log("XXX",this.statusService.getStatusList());
       for (const status of this.statusService.getStatusList()) {
           this.columnCards.push(this.getCardsWithStatus(status));
       }

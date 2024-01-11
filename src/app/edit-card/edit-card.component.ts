@@ -1,13 +1,13 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {Card} from "../card";
-import {CardService} from "../card.service";
-import {PriorityService} from "../priority.service";
-import {of} from "rxjs";
-import {Priority} from "../priority";
-import {AppComponent} from "../app.component";
-import {Status} from "../status";
-import {StatusService} from "../status.service";
-import {DataService} from "../db.service";
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Card } from "../card";
+import { CardService } from "../card.service";
+import { PriorityService } from "../priority.service";
+import { of } from "rxjs";
+import { Priority } from "../priority";
+import { AppComponent } from "../app.component";
+import { Status } from "../status";
+import { StatusService } from "../status.service";
+import { DataService } from "../db.service";
 
 @Component({
   selector: 'app-edit-card',
@@ -15,12 +15,13 @@ import {DataService} from "../db.service";
   styleUrls: ['./edit-card.component.css']
 })
 export class EditCardComponent {
-  @ViewChild('modalElement') modalelement!:ElementRef;
+  @ViewChild('modalElement') modalelement!: ElementRef;
 
-  card!:Card;
+  card!: Card;
 
   closeWindow() {
     this.modalelement.nativeElement.style.display = "none";
+    this.modalelement.nativeElement.style.visibility = "hidden";
     this.tmpDescription = null;
     this.tmpTitel = null;
     this.tmpPriority = null;
@@ -29,25 +30,25 @@ export class EditCardComponent {
 
   protected readonly of = of;
 
-  constructor(public priorityService:PriorityService,
-              public statusService:StatusService,
-              private appComponent:AppComponent,
-              private cardService:CardService,
-              private dataService: DataService) {
+  constructor(public priorityService: PriorityService,
+    public statusService: StatusService,
+    private appComponent: AppComponent,
+    private cardService: CardService,
+    private dataService: DataService) {
 
     this.card = appComponent.inCardEdit;
   }
 
-  editTitle:boolean = false;
-  editDescription:boolean = false;
-  prioritySelect:boolean = true;
-  statusSelect:boolean = true;
+  editTitle: boolean = false;
+  editDescription: boolean = false;
+  prioritySelect: boolean = true;
+  statusSelect: boolean = true;
 
   //Temp. Changes (Placeholder)
-  tmpTitel!:string | null;
-  tmpDescription!:string | null;
-  tmpPriority!:Priority | null;
-  tmpStatus!:Status | null;
+  tmpTitel!: string | null;
+  tmpDescription!: string | null;
+  tmpPriority!: Priority | null;
+  tmpStatus!: Status | null;
 
 
   //öffnet das Editor menu für die aktuelle Card
@@ -55,6 +56,7 @@ export class EditCardComponent {
     const modalElement = document.getElementById('modalElement');
     if (modalElement) {
       modalElement.style.display = 'flex';
+      modalElement.style.visibility = 'visible';
     }
   }
 
@@ -67,38 +69,38 @@ export class EditCardComponent {
   }
 
   //gibt den Titel des Originals bzw. der Temporären ungespeicherten Card zurück
-  public GetTitle():string {
+  public GetTitle(): string {
     if (this.tmpTitel) {
       return this.tmpTitel
-    }else {
-      return  this.appComponent.inCardEdit.title;
+    } else {
+      return this.appComponent.inCardEdit.title;
     }
   }
 
   //gibt die Priorität des Originals bzw. der Temporären ungespeicherten Card zurück
-  public GetPriority():Priority {
+  public GetPriority(): Priority {
     if (this.tmpPriority) {
       return this.tmpPriority;
-    }else {
-      return  this.appComponent.inCardEdit.priority;
+    } else {
+      return this.appComponent.inCardEdit.priority;
     }
   }
 
   //gibt den Status des Originals bzw. der Temporären ungespeicherten Card zurück
-  public GetStatus():Status {
+  public GetStatus(): Status {
     if (this.tmpStatus) {
       return this.tmpStatus;
-    }else {
+    } else {
       return this.appComponent.inCardEdit.status as Status;
     }
   }
 
   //gibt die Beschreibung des Originals bzw. der Temporären ungespeicherten Card zurück
-  public GetDescription():string {
+  public GetDescription(): string {
     let desc: string = "";
     if (this.tmpDescription != null && this.tmpDescription.length > 0) {
       desc = this.tmpDescription!;
-    }else if(this.appComponent.inCardEdit.description && this.appComponent.inCardEdit.description.length > 0) {
+    } else if (this.appComponent.inCardEdit.description && this.appComponent.inCardEdit.description.length > 0) {
       desc = this.appComponent.inCardEdit.description;
     }
 
@@ -106,19 +108,19 @@ export class EditCardComponent {
   }
 
   //gibt die ID der Card zurück, die editiert wird
-  public GetId():number {
-    return  this.appComponent.inCardEdit.id;
+  public GetId(): number {
+    return this.appComponent.inCardEdit.id;
   }
 
-  public GetCreateDate():Date {
-    return  this.appComponent.inCardEdit.created;
+  public GetCreateDate(): Date {
+    return this.appComponent.inCardEdit.created;
   }
 
-  public GetEditedDate():Date | null {
-    return  this.appComponent.inCardEdit.edited;
+  public GetEditedDate(): Date | null {
+    return this.appComponent.inCardEdit.edited;
   }
 
-  time_ago(time:any) {
+  time_ago(time: any) {
 
     switch (typeof time) {
       case 'number':
@@ -160,15 +162,14 @@ export class EditCardComponent {
     }
     var i = 0,
       format;
-    while (format = time_formats[i++])
-      { // @ts-ignore
-        if (seconds < format[0]) {
-                if (typeof format[2] == 'string')
-                  return format[list_choice];
-                else
-                  return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
-              }
+    while (format = time_formats[i++]) { // @ts-ignore
+      if (seconds < format[0]) {
+        if (typeof format[2] == 'string')
+          return format[list_choice];
+        else
+          return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
       }
+    }
     return time;
   }
 
@@ -182,7 +183,7 @@ export class EditCardComponent {
   checkTitleInput() {
     if ((<HTMLInputElement>document.getElementById("titleinput")).value.length < 3) {
       document.getElementById("titleinput")!.classList.add("error");
-    }else {
+    } else {
       document.getElementById("titleinput")!.classList.remove("error");
 
     }
@@ -191,7 +192,7 @@ export class EditCardComponent {
   //speichert den geänderten Titel temporär ab
   saveTmpTitle() {
     if (typeof (<HTMLInputElement>document.getElementById("titleinput")).value) {
-      if ((<HTMLInputElement>document.getElementById("titleinput")).value.length >= 3){
+      if ((<HTMLInputElement>document.getElementById("titleinput")).value.length >= 3) {
         this.tmpTitel = (<HTMLInputElement>document.getElementById("titleinput")).value;
       }
     }
@@ -215,7 +216,7 @@ export class EditCardComponent {
   //öffnet das Prioritätselectionmenu
   openPrioritySelection() {
     this.closeSelection();
-   this.prioritySelect = false;
+    this.prioritySelect = false;
   }
   //öffnet das Statusselectionmenu
   openStatusSelection() {
@@ -234,13 +235,13 @@ export class EditCardComponent {
   }
 
   //speichert eine ausgewählte Priorität temporär ab
-  selectPriority(priority:Priority) {
+  selectPriority(priority: Priority) {
     this.tmpPriority = priority;
     this.closeSelection();
   }
 
   //speichert einen ausgewählten Status temporär ab
-  selectStatus(status:Status) {
+  selectStatus(status: Status) {
     this.tmpStatus = status;
     this.closeSelection();
   }
@@ -248,12 +249,12 @@ export class EditCardComponent {
   //übernimmt alle temporären änderungen in die card
   save() {
     this.closeSelection();
-    const saveCard: Card = {title: this.GetTitle(), priority: this.GetPriority(), description: this.GetDescription(), id: this.GetId(), status: this.GetStatus(), created: this.GetCreateDate(), edited: this.card.edited};
+    const saveCard: Card = { title: this.GetTitle(), priority: this.GetPriority(), description: this.GetDescription(), id: this.GetId(), status: this.GetStatus(), created: this.GetCreateDate(), edited: this.card.edited };
     this.cardService.setCard(saveCard);
     this.closeWindow();
 
     //änderung in db speichern
-    this.updateCardInDb(this.GetId(),this.GetTitle(),this.GetStatus().id, this.GetPriority().id, this.GetDescription(), this.GetEditedDate());
+    this.updateCardInDb(this.GetId(), this.GetTitle(), this.GetStatus().id, this.GetPriority().id, this.GetDescription(), this.GetEditedDate());
   }
 
   //löscht die Card
@@ -275,7 +276,7 @@ export class EditCardComponent {
     )
   }
 
-  private deleteCardinDb(id:number) {
+  private deleteCardinDb(id: number) {
     this.dataService.deleteCardinDb(id).subscribe(
       response => {
         console.log('Card successfully deleted');

@@ -33,9 +33,10 @@ export class StatusColumnComponent {
 
   //öffnet das Edit Menü, bei Klick auf Karte
   openEdit() {
-    const statusedit = document.getElementById(this.status.id.toString());
+    const statusedit = document.getElementById("status-edit-window-" + this.status.id.toString());
     if (statusedit) {
       statusedit.style.display = 'flex';
+      statusedit.style.visibility = 'visible';
     }
   }
 
