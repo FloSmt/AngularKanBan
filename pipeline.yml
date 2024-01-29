@@ -1,0 +1,15 @@
+trigger: none
+on:
+  workflow_dispatch:
+
+schedules:
+  - cron: "0 0 0 15 * ? *"
+    displayName: cleanup remote git-Branches
+    always: true
+
+jobs:
+- job: run_cleanup_script
+  displayName: Delete outdated Branches
+  steps:
+    - bash: sh ./delete_old_branches.sh
+
