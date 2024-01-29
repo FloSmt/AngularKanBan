@@ -1,4 +1,5 @@
 #!/bin/bash
+git fetch --all
 ###############################################################
 #Master branch, auf den alle gemerged sein sollen
 masterBranch="main";
