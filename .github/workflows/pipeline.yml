@@ -10,6 +10,6 @@ jobs:
           fetch-depth: 0
       - uses: fregante/setup-git-user@v2
       - name: Build and Deploy Script
-        run: bash delete_old_branches.sh true r 30
+        run: bash delete_old_branches.sh false r 30
         shell: bash
 

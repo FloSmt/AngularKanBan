@@ -97,11 +97,10 @@ for branch in $(git for-each-ref --merged="$masterBranch" --format='%(refname:sh
       else
         #Branches löschen
         if [ "$clearLocal" == "true" ]; then
-          echo "TR";
             git branch -d "$name";
         else
-            echo "t";
             git push origin --delete "$name"
+            exit;
         fi
 
         echo "$name deleted!";
