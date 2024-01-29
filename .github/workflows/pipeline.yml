@@ -2,8 +2,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  delete_old_branches:
     runs-on: ubuntu-20.04
+    permissions: write-all
     steps:
       - uses: actions/checkout@v4
         with:
