@@ -74,7 +74,6 @@ elif [ "$cleanLocal" == "remote" ] || [ "$cleanLocal" == "r" ]; then
     echo "cleanup REMOTE Branches:";
 else
     echo "Wrong Input: <dryRun> <local/remote> <timeInDays>";
-    sleep 20;
     exit;
 fi
 
@@ -113,5 +112,3 @@ for branch in $(git for-each-ref --merged="$masterBranch" --format='%(refname:sh
 done
 
 echo "$index Branches were deleted."
-
-sleep 120;
