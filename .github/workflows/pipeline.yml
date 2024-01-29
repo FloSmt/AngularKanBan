@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - name: test
-      run: ./../delete_old_branches.sh
+      run: bash delete_old_branches.sh true r 30
       shell: bash
 
