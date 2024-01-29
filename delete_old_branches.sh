@@ -77,6 +77,7 @@ else
     exit;
 fi
 
+git branch -r
 
 echo  "Search deletable Branches...";
 
