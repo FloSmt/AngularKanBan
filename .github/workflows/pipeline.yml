@@ -10,5 +10,7 @@ schedules:
 jobs:
  build:
   steps:
-    - bash: sh ./delete_old_branches.sh
+    - name: test
+      run: ./delete_old_branches.sh
+      shell: bash
 
