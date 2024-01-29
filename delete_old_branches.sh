@@ -1,5 +1,4 @@
 #!/bin/bash
-git fetch --all
 ###############################################################
 #Master branch, auf den alle gemerged sein sollen
 masterBranch="main";
@@ -77,8 +76,6 @@ else
     echo "Wrong Input: <dryRun> <local/remote> <timeInDays>";
     exit;
 fi
-
-git branch -r
 
 echo  "Search deletable Branches...";
 
