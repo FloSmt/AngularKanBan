@@ -7,7 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build and Deploy Script
-        working-directory: ${{ github.workspace }}/AngularKanBan
         run: bash delete_old_branches.sh true r 30
         shell: bash
 
