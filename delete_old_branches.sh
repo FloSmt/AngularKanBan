@@ -60,13 +60,8 @@ function isOldBranch()
 let index=0;
 let timeInSeconds;
 
-if  [[ $timeInDays =~ '^[0-9]+$' ]]; then
-  timeInSeconds=$timeInDays*24*60*60;
-else
-  echo "Wrong Input: <dryRun> <local/remote> <timeInDays> (timeInDays has to be a Number)";
-  sleep 20;
-  exit;
-fi
+let timeInSeconds=$timeInDays*24*60*60;
+
 
 path="";
 
