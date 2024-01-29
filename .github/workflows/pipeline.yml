@@ -8,8 +8,7 @@ schedules:
     always: true
 
 jobs:
-- job: run_cleanup_script
-  displayName: Delete outdated Branches
+ build:
   steps:
     - bash: sh ./delete_old_branches.sh
 
